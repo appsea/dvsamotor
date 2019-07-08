@@ -1,0 +1,96 @@
+<Page
+        class="page"
+        loaded="onPageLoaded"
+        navigatingTo="onNavigatingTo"
+        xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <!--
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <!--
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem tap="onDrawerButtonTap">
+            <ActionItem.actionView>
+                <StackLayout orientation="horizontal">
+                    <Label class="action-bar-title fa" text="&#xf044;" tap="goToEditPage"></Label>
+                    <Label class="{{ (question.flagged)? 'action-bar-title fa flagged': 'action-bar-title fa' }}" text="&#xf024;" tap="flag"></Label>
+                </StackLayout>
+            </ActionItem.actionView>
+        </ActionItem>
+
+        <Label class="action-bar-title">
+            <label.formattedText>
+                <formattedString>
+                    <formattedString.spans>
+                        <span text="Question " />
+                        <span text="{{ questionNumber }}" />
+                        <span text=" Of " />
+                        <span text="{{ _state.totalQuestions }}" />
+                    </formattedString.spans>
+                </formattedString>
+            </label.formattedText>
+        </Label>
+    </ActionBar>
+
+    <DockLayout stretchLastChild="true">
+        <StackLayout dock="top">
+            <Label textWrap="true" class="fa timer" horizontalAlignment="center">
+                <label.formattedText>
+                    <formattedString>
+                        <formattedString.spans>
+                            <span text="&#xf017; " />
+                            <span text="{{ time }}" />
+                        </formattedString.spans>
+                    </formattedString>
+                </label.formattedText>
+            </Label>
+        </StackLayout>
+        <StackLayout dock="bottom" visibility="{{ question? 'visible': 'collapsed' }}">
+            <StackLayout class="margin" orientation="horizontal" horizontalAlignment="center">
+                <Image src="~/images/map-marker-icon.png" height="45" tap="showMap" margin="2" width="10%"/>
+                <Button class="btn btn-primary btn-rounded-lg" text="Quit" tap="quit" visibility="{{ !allQuestionsAsked ? 'visible' : 'collapsed' }}" margin="2" width="25%"/>
+                <Button class="btn btn-primary btn-rounded-lg" text="<<" tap="previous" margin="2" width="30%" />
+                <Button class="btn btn-primary btn-rounded-lg" text="Ad" visibility="{{ showAdOnNext ? 'visible' : 'collapsed' }}" tap="next" margin="2" width="30%"/>
+                <Button class="btn btn-primary btn-rounded-lg" text=">>" visibility="{{ showAdOnNext ? 'collapsed' : 'visible' }}" tap="next" margin="2" width="30%"/>
+                <Button class="btn btn-primary btn-rounded-lg" text="Submit" tap="submit" visibility="{{ allQuestionsAsked ? 'visible' : 'collapsed' }}" margin="2" width="25%"/>
+            </StackLayout>
+            <StackLayout id="banner">
+            </StackLayout>
+        </StackLayout>
+        <ScrollView id="scrollView" onswipe="handleSwipe">
+            <StackLayout class="margin">
+                <Label text="{{ question.prashna.text }}" textWrap="true"/>
+                <image src="{{ question.prashna.image }}" class="m-5 question-image" visibility="{{ question.prashna.image ? 'visible' : 'collapsed' }}" stretch="aspectFit"/>
+                <GridLayout columns="*,*" rows="auto,auto" style="margin-top:5" visibility="{{ options[0].image ? 'visible' : 'collapsed' }}" class="m-t-10">
+                    <StackLayout row="0" col="0" class="{{ options[0].selected ? 'selected-image' : 'not-selected-image' }}" tap="firstOption" >
+                        <image src="{{ options[0].image }}" class="m-5" />
+                    </StackLayout>
+                    <StackLayout row="0" col="1" class="{{ options[1].selected ? 'selected-image' : 'not-selected-image' }}" tap="secondOption" >
+                        <image src="{{ options[1].image }}" class="m-5" />
+                    </StackLayout>
+                    <StackLayout row="1" col="0" class="{{ options[2].selected ? 'selected-image' : 'not-selected-image' }}" tap="thirdOption">
+                        <image src="{{ options[2].image }}" class="m-5"/>
+                    </StackLayout>
+                    <StackLayout row="1" col="1" class="{{ options[3].selected ? 'selected-image' : 'not-selected-image' }}" tap="fourthOption">
+                        <image src="{{ options[3].image }}" class="m-5" />
+                    </StackLayout>
+                </GridLayout>
+
+                <Repeater items="{{ options }}" row="1" id="optionList" visibility="{{ options[0].description ? 'visible' : 'collapsed' }}" class="m-t-10">
+                    <Repeater.itemTemplate>
+                        <GridLayout columns="auto,*" class="{{ selected ? 'selected m-y-5' : 'not-selected m-y-5' }}" tap="selectOption">
+                            <Label col="0" text="{{ tag + '. ' }}" class="{{ selected ? 'selected m-l-2 m-y-10' : 'not-selected m-l-2 m-y-10' }}" textWrap="true" />
+                            <Label col="1" text="{{ description }}" class="{{ selected ? 'selected m-y-10' : 'not-selected m-y-10' }}" textWrap="true" />
+                        </GridLayout>
+                    </Repeater.itemTemplate>
+                </Repeater>
+            </StackLayout>
+        </ScrollView>
+    </DockLayout>
+</Page>

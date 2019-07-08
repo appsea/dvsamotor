@@ -1,0 +1,80 @@
+<Page
+        class="page"
+        navigatingTo="onNavigatingTo"
+        xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <!--
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <!--
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Premium"/>
+    </ActionBar>
+
+    <GridLayout>
+        <StackLayout class="page-login" backgroundImage="res://mesh" visibility="{{ premium ?'collapsed':'visible' }}"
+                     height="100%">
+            <Label text="&#xf43f;" class="fa m-t-20 icon"/>
+            <GridLayout rows="auto, auto, auto, auto" class="center m-t-15">
+                <GridLayout row="0" columns="auto, auto" class="m-10">
+                    <Label col="0" text="&#xf02d;" class="fa c-white tick m-x-20"></Label>
+                    <StackLayout col="1" verticalAlignment="center">
+                        <Label text="All Question!" class="feature" textWrap="true"/>
+                        <Label class="description" text="Access whole question bank."/>
+                    </StackLayout>
+                </GridLayout>
+                <GridLayout row="1" columns="auto, auto" class="m-10">
+                    <Label col="0" text="&#xf4e2;" class="fa c-white tick m-x-20"></Label>
+                    <StackLayout col="1" verticalAlignment="center">
+                        <Label text="Go Ad-Free!" class="feature" textWrap="true"/>
+                        <Label class="description" text="Focus on what is important."/>
+                    </StackLayout>
+                </GridLayout>
+                <GridLayout row="2" columns="auto, auto" class="m-10">
+                    <Label col="0" text="&#xf072;" class="fa c-white tick m-x-20 rotate"></Label>
+                    <StackLayout col="1" verticalAlignment="center">
+                        <Label text="Go Offline!" class="feature" textWrap="true"/>
+                        <Label class="description" text="Practice even when you are offline.">
+                        </Label>
+                    </StackLayout>
+                </GridLayout>
+                <GridLayout row="3" columns="auto, auto" class="m-10">
+                    <Label col="0" text="&#xf164;" class="fa c-white tick m-x-20"></Label>
+                    <StackLayout col="1" verticalAlignment="center">
+                        <Label text="Support us!" class="feature" textWrap="true"/>
+                        <Label class="description" text="Your support means lot to us."/>
+                    </StackLayout>
+                </GridLayout>
+            </GridLayout>
+            <Button class="btn btn-login btn-rounded-sm font-weight-bold t-18" backgroundColor="#ffffff" tap="pay"
+                    text="{{ item.priceFormatted }}"></Button>
+            <Label class="t-12 white-color center" textDecoration="underline" text="Restore Purchase"
+                   tap="onRestoreTap"></Label>
+            <ActivityIndicator busy="{{ loading }}"/>
+        </StackLayout>
+        <FlexboxLayout class="page-login center" backgroundImage="res://mesh"
+                       visibility="{{ premium ?'visible':'collapsed' }}" height="100%">
+            <GridLayout>
+                <!--f128-->
+                <StackLayout class="m-t-30">
+                    <Label text="&#xf43f;" class="fa m-t-20 icon"/>
+                    <Label class="t-17 white-color center" text="You are a premium user!"></Label>
+                    <Button class="btn btn-login btn-rounded-sm font-weight-bold t-30 m-t-30"
+                            backgroundColor="#ffffff"
+                            tap="practice" text="Practice!!"></Button>
+                </StackLayout>
+            </GridLayout>
+        </FlexboxLayout>
+    </GridLayout>
+</Page>

@@ -1,0 +1,127 @@
+<Page
+        class="page"
+        loaded="onPageLoaded"
+        navigatingTo="onNavigatingTo"
+        xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <!--
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <!--
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem tap="onDrawerButtonTap">
+            <ActionItem.actionView>
+                <StackLayout orientation="horizontal">
+                    <Label class="action-bar-title fa" text="&#xf044;" tap="goToEditPage"></Label>
+                    <Label class="{{ (question.flagged)? 'action-bar-title fa flagged': 'action-bar-title fa' }}" text="&#xf024;" tap="flag"></Label>
+                </StackLayout>
+            </ActionItem.actionView>
+        </ActionItem>
+
+        <Label class="action-bar-title" visibility="{{ length>0 ? 'visible' : 'collapsed' }}">
+            <label.formattedText>
+                <formattedString>
+                    <formattedString.spans>
+                        <span text="Question "/>
+                        <span text="{{ questionNumber }}"/>
+                        <span text=" of "/>
+                        <span text=" {{ length }}"/>
+                    </formattedString.spans>
+                </formattedString>
+            </label.formattedText>
+        </Label>
+    </ActionBar>
+
+    <DockLayout stretchLastChild="true" visibility="{{ question.number ? 'visible' : 'collapsed' }}">
+        <StackLayout dock="top" height="20dpi">
+        </StackLayout>
+        <StackLayout dock="bottom">
+            <StackLayout class="margin" orientation="horizontal" horizontalAlignment="center">
+                <Button class="btn btn-primary btn-rounded-lg" text="<<" tap="previous" margin="10dpi"
+                        width="30%"/>
+                <Button class="btn btn-primary btn-rounded-lg" text="Ad" visibility="{{ showAdOnNext ? 'visible' : 'collapsed' }}" tap="next" margin="10dpi" width="30%"/>
+                <Button class="btn btn-primary btn-rounded-lg" text=">>" visibility="{{ showAdOnNext ? 'collapsed' : 'visible' }}" tap="next" margin="10dpi" width="30%"/>
+                <Button class="btn btn-primary btn-rounded-lg"
+                        visibility="{{ question.show ? 'collapsed' : 'visible' }}" text="Answer"
+                        tap="showAnswer"
+                        margin="10dpi" width="30%"/>
+                <Button class="btn btn-primary btn-rounded-lg"
+                        visibility="{{ question.show ? 'visible' : 'collapsed' }}" text="Explain"
+                        tap="moveToLast"
+                        margin="10dpi" width="30%"/>
+            </StackLayout>
+            <StackLayout id="banner">
+            </StackLayout>
+        </StackLayout>
+        <ScrollView id="scrollView" onswipe="handleSwipe">
+            <StackLayout class="margin">
+                <Label text="{{ question.prashna.text }}" textWrap="true"/>
+                <image src="{{ question.prashna.image }}" minHeight="40%" class="question-image m-y-10"  visibility="{{ question.prashna.image ? 'visible' : 'collapsed' }}" stretch="aspectFit"/>
+
+                <GridLayout columns="*,*" rows="auto,auto" style="margin-top:5" visibility="{{ options[0].image ? 'visible' : 'collapsed' }}">
+                    <StackLayout row="0" col="0"
+                                 class="{{ (options[0].show && options[0].correct)? 'correct' : (options[0].show && options[0].selected && !options[0].correct)? 'incorrect': 'not-selected-image' }}"
+                                 tap="selectOption">
+                        <image src="{{ options[0].image }}" tap="firstOption" class="m-5"
+
+                               visibility="{{ options[0].image ? 'visible' : 'collapsed' }}"/>
+                    </StackLayout>
+                    <StackLayout row="0" col="1"
+                                 class="{{ (options[1].show && options[1].correct)? 'correct' : (options[1].show && options[1].selected && !options[1].correct)? 'incorrect': 'not-selected-image' }}"
+                                 tap="selectOption">
+                        <image src="{{ options[1].image }}" tap="secondOption" class="m-5"
+
+                               visibility="{{ options[1].image ? 'visible' : 'collapsed' }}"/>
+                    </StackLayout>
+                    <StackLayout row="1" col="0"
+                                 class="{{ (options[2].show && options[2].correct)? 'correct' : (options[2].show && options[2].selected && !options[2].correct)? 'incorrect': 'not-selected-image' }}"
+                                 tap="selectOption">
+                        <image src="{{ options[2].image }}" tap="thirdOption" class="m-5"
+
+                               visibility="{{ options[2].image ? 'visible' : 'collapsed' }}"/>
+                    </StackLayout>
+                    <StackLayout row="1" col="1"
+                                 class="{{ (options[3].show && options[3].correct)? 'correct' : (options[3].show && options[3].selected && !options[3].correct)? 'incorrect': 'not-selected-image' }}"
+                                 tap="selectOption">
+                        <image src="{{ options[3].image }}" tap="fourthOption" class="m-5"
+
+                               visibility="{{ options[3].image ? 'visible' : 'collapsed' }}"/>
+                    </StackLayout>
+                </GridLayout>
+
+                <Repeater items="{{ options }}" row="1" id="optionList" visibility="{{ options[0].description ? 'visible' : 'collapsed' }}">
+                    <Repeater.itemTemplate>
+                        <GridLayout columns="auto,*" class="{{ (show && correct)? 'correct m-y-5' : (show && selected && !correct)? 'incorrect m-y-5': 'not-selected m-y-5' }}">
+                            <Label col="0" text="{{ tag + '. ' }}"
+                                   class="{{ (show && correct)? 'correct' : (show && selected && !correct)? 'incorrect': 'not-selected' }}"
+                                   textWrap="true" marginTop="10dpi" marginBottom="10dpi" tap="selectOption"
+                                  />
+                            <Label col="1" text="{{ description }}"
+                                   class="{{ (show && correct)? 'correct' : (show && selected && !correct)? 'incorrect': 'not-selected' }}"
+                                   textWrap="true" marginTop="10dpi" marginBottom="10dpi" tap="selectOption"
+                                  />
+                        </GridLayout>
+                    </Repeater.itemTemplate>
+                </Repeater>
+                <Label id="explanationHeader" text="Explanation: " marginTop="20dpi"
+                       visibility="{{ question && question.show ? 'visible' : 'collapsed' }}" style="font-weight: bold"
+                       textWrap="true"/>
+                <Label id="explanation" text="{{ question && question.explanation}}" marginBottom="10dpi"
+                       textWrap="true"
+                       visibility="{{ question.show ? 'visible' : 'collapsed' }}"/>
+                <Label id="defaultExplanation"
+                       text="Explanation Coming Soon. Feel free to update it yourself by clicking on following button:)"
+                       marginBottom="5dpi" textWrap="true"
+                       visibility="{{ question && question.show && !question.explanation ? 'visible' : 'collapsed' }}"/>
+                <Button id="suggestionButton" text="Improve Question" class="btn btn-primary" tap="goToEditPage"
+                        visibility="{{ question && question.show ? 'visible' : 'collapsed' }}"/>
+            </StackLayout>
+        </ScrollView>
+    </DockLayout>
+</Page>

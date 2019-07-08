@@ -1,0 +1,135 @@
+<Page
+        class="page"
+        loaded="onPageLoaded"
+        navigatingTo="onNavigatingTo"
+        navigatedFrom="onNavigatedFrom"
+        xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <!--
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <!--
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem tap="onDrawerButtonTap">
+            <ActionItem.actionView>
+                <StackLayout orientation="horizontal">
+                    <Label class="action-bar-title fa m-r-4" text="&#xf002;" tap="toggleSearch"></Label>
+                </StackLayout>
+            </ActionItem.actionView>
+        </ActionItem>
+        <Label class="action-bar-title">
+            <label.formattedText>
+                <formattedString>
+                    <formattedString.spans>
+                        <span text="{{ type }}"/>
+                        <span text=" Questions"/>
+                    </formattedString.spans>
+                </formattedString>
+            </label.formattedText>
+        </Label>
+    </ActionBar>
+
+    <GridLayout rows="auto, *, auto">
+        <SearchBar row="0" hint="Search Questions..." id="searchBar" loaded="{{ searchBarLoaded }}" text="{{ searchPhrase }}" submit="{{ onSearchSubmit }}" clear="{{ clear }}" class="{{ searching ? 'searching search-bar' : 'not-searching search-bar' }}" visibility="{{ searching ? 'visible': 'collapsed'}}"/>
+        <GridLayout row="1" rows="auto, *">
+            <TextField height="0" loaded="{{ textFieldLoaded }}"></TextField>
+            <ListView  row="1" id="listView" class="margin" items="{{ questions }}" separatorColor="blue" itemTemplateSelector="$index">
+                <ListView.itemTemplate>
+                    <StackLayout>
+                        <Label marginTop="20dpi" textAlignment="center" class="font-weight-bold">
+                            <Label.formattedText>
+                                <FormattedString>
+                                    <FormattedString.spans>
+                                        <span text="Question " />
+                                        <span text="{{ $index + 1 }}"/>
+                                        <span text=" Of "/>
+                                        <span text="{{$parents['ListView'].questions, $parents['ListView'].questions.length }}" />
+                                    </FormattedString.spans>
+                                </FormattedString>
+                            </Label.formattedText>
+                        </Label>
+                        <Label text="{{ prashna.text }}" textWrap="true"/>
+                        <image src="{{ prashna.image }}" class="m-10 question-image" minHeight="40%" visibility="{{ prashna.image ? 'visible' : 'collapsed' }}" stretch="aspectFit"/>
+                        <GridLayout columns="*,*" rows="auto,auto" visibility="{{ !skipped && options[0].image ? 'visible' : 'collapsed' }}">
+                            <StackLayout row="0" col="0"
+                                         class="{{ skipped ? (options[0].correct? 'skipped-correct-image m-5':'skipped-not-selected-image m-5') : (!options[0].selected && !options[0].correct)? 'not-selected-image': (skipped && options[0].correct)? 'skipped m-5':(options[0].selected && !options[0].correct)?'incorrect m-5': 'correct m-5'}}" >
+                                <image src="{{ options[0].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="0" col="1"
+                                         class="{{ skipped ? (options[1].correct? 'skipped-correct-image m-5':'skipped-not-selected-image m-5') : (!options[1].selected && !options[1].correct)? 'not-selected-image': (skipped && options[1].correct)? 'skipped m-5':(options[1].selected && !options[1].correct)?'incorrect m-5': 'correct m-5'}}">
+                                <image src="{{ options[1].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="1" col="0"
+                                         class="{{ skipped ? (options[2].correct? 'skipped-correct-image m-5':'skipped-not-selected-image m-5') : (!options[2].selected && !options[2].correct)? 'not-selected-image': (skipped && options[2].correct)? 'skipped m-5':(options[2].selected && !options[2].correct)?'incorrect m-5': 'correct m-5'}}">
+                                <image src="{{ options[2].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="1" col="1"
+                                         class="{{ skipped ? (options[3].correct? 'skipped-correct-image m-5':'skipped-not-selected-image m-5') : (!options[3].selected && !options[3].correct)? 'not-selected-image': (skipped && options[3].correct)? 'skipped m-5':(options[3].selected && !options[3].correct)?'incorrect m-5': 'correct m-5'}}">
+                                <image src="{{ options[3].image }}" class="m-5" />
+                            </StackLayout>
+                        </GridLayout>
+                        <GridLayout columns="*,*" rows="auto,auto" visibility="{{ skipped && options[0].image ? 'visible' : 'collapsed' }}">
+                            <StackLayout row="0" col="0" class="{{ options[0].correct ? 'skipped-correct-image m-5':'skipped-not-selected-image m-5' }}">
+                                <image src="{{ options[0].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="0" col="1" class="{{ options[1].correct ? 'skipped-correct-image m-5':'skipped-not-selected-image m-5' }}">
+                                <image src="{{ options[1].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="1" col="0" class="{{ options[2].correct ? 'skipped-correct-image m-5':'skipped-not-selected-image m-5' }}">
+                                <image src="{{ options[2].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="1" col="1" class="{{ options[3].correct ? 'skipped-correct-image m-5':'skipped-not-selected-image m-5' }}">
+                                <image src="{{ options[3].image }}" class="m-5" />
+                            </StackLayout>
+                        </GridLayout>
+
+                        <Repeater items="{{ options }}" row="1" visibility="{{ !skipped && options[0].description ? 'visible' : 'collapsed' }}">
+                            <Repeater.itemTemplate>
+                                <GridLayout columns="auto,*" class="{{ (!selected && !correct)? 'not-selected m-y-5': (selected && !correct)?'incorrect m-y-5': 'correct m-y-5'}}">
+                                    <Label col="0" text="{{ tag + '. ' }}"
+                                           class="{{ (!selected && !correct)? 'not-selected m-l-2 m-y-10': (selected && !correct)?'incorrect m-l-2 m-y-10': 'correct m-l-2 m-y-10'}}"
+                                           textWrap="true"/>
+                                    <Label col="1" text="{{ description }}"
+                                           class="{{ (!selected && !correct)? 'not-selected m-y-10': (selected && !correct)?'incorrect m-y-10': 'correct m-y-10'}}"
+                                           textWrap="true"/>
+                                </GridLayout>
+                            </Repeater.itemTemplate>
+                        </Repeater>
+                        <Repeater items="{{ options }}" row="1" visibility="{{ skipped && options[0].description ? 'visible' : 'collapsed' }}">
+                            <Repeater.itemTemplate>
+                                <GridLayout columns="auto,*" class="{{ correct ? 'skipped m-y-5': 'not-selected m-y-5'}}">
+                                    <Label col="0" text="{{ tag + '. ' }}" class="{{ correct ? 'skipped m-l-2 m-y-10': 'not-selected m-l-2 m-y-10'}}" textWrap="true" />
+                                    <Label col="1" text="{{ description }}" class="{{ correct ? 'skipped m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
+                                </GridLayout>
+                            </Repeater.itemTemplate>
+                        </Repeater>
+                        <Label text="Explanation: " style="font-weight: bold; margin-top: 10dpi"  textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
+                        <Label text="{{ explanation }}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
+                    </StackLayout>
+                </ListView.itemTemplate>
+            </ListView>
+            <Label textWrap="true" textAlignment="center" marginTop="20dpi" row="1" visibility="{{ questions.length === 0 ? 'visible' : 'collapsed' }}" class="margin" horizontalAlignment="center" verticalAlignment="center">
+                <label.formattedText>
+                    <formattedString>
+                        <formattedString.spans>
+                            <span text="No Questions "/>
+                            <span text="{{ message }}"/>
+                        </formattedString.spans>
+                    </formattedString>
+                </label.formattedText>
+            </Label>
+        </GridLayout>
+        <StackLayout row="2" class="layout-class m-x-2" horizontalAlignment="center" orientation="horizontal">
+            <Button class="all t-12" text="All" tap="all" width="20%" margin="2dpi" />
+            <Button class="correct t-12" text="Correct" tap="correct" width="25%" margin="2dpi" />
+            <Button class="incorrect t-12" text="Wrong" tap="incorrect" width="25%" margin="2dpi" />
+            <Button class="skipped t-12" text="Skipped" tap="skipped" width="30%" margin="2dpi" />
+        </StackLayout>
+    </GridLayout>
+</Page>

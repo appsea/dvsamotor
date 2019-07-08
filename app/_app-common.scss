@@ -1,0 +1,443 @@
+// Place any CSS rules you want to apply on both iOS and Android here.
+// This is where the vast majority of your CSS code goes.
+@import 'app-variables';
+// Font icon class
+.fa {
+  font-family: "fa-solid-900", "FontAwesome";
+}
+
+// Common page class
+.page-content {
+
+  .page-placeholder {
+    color: $page-icon-color;
+    font-size: $page-content-placeholder-font-size;
+    vertical-align: center;
+    horizontal-align: center;
+  }
+
+  .page-icon {
+    font-size: 72;
+    vertical-align: top;
+    horizontal-align: center;
+    color: $page-icon-color;
+    margin-top: 20%;
+  }
+}
+
+.page {
+  background-color: #ffffff;
+  color: #000000;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  font-size: 50;
+  color: white;
+  horizontal-align: center;
+}
+
+.white-color {
+  color: white;
+  margin-top: 15;
+}
+
+.center {
+  horizontal-align: center;
+}
+
+.page-login {
+  background: #3C59FD no-repeat right bottom;
+  background-size: contain;
+  color: #ffffff;
+  flex-direction: column;
+  align-items: center;
+}
+
+//Action bar
+ActionBar .action-bar-title {
+  horizontal-align: center;
+  color: white;
+}
+
+ActionBar .flagged {
+  color: $flag-color;
+}
+
+Label {
+  color: black;
+  font-size: 18;
+}
+
+.result-passed {
+  color: $passed;
+  font-size: 40;
+}
+
+.result-failed {
+  color: $incorrect;
+  font-size: 40;
+}
+
+.timer {
+  font-size: 20;
+  color: $timer-color;
+  margin-top: 5;
+  margin-bottom: 5;
+}
+
+.selected {
+  background-color: #3A53FF;
+  color: white;
+  border-radius: 8;
+}
+
+.not-selected {
+  background-color: $not-selected;
+  color: black;
+  border-radius: 8;
+}
+
+.question-image {
+  border-radius: 8;
+  height: 200;
+  @extend .m-y-10;
+}
+
+.selected-image {
+  background-color: $selected-item;
+  border-radius: 8;
+  @extend .m-5;
+}
+
+.not-selected-image {
+  background-color: $question-image-background;
+  border-radius: 8;
+  @extend .m-5;
+}
+
+.skipped-correct-image {
+  background-color: $question-image-background;
+  color: white;
+  border-radius: 8;
+}
+
+.skipped-not-selected-image {
+  background-color: $tbd;
+  color: white;
+  border-radius: 8;
+}
+
+.margin {
+  margin-left: 15;
+  margin-right: 15;
+}
+
+.margin-all {
+  padding: 15;
+}
+
+.all {
+  background-color: $all;
+  color: white;
+  border-radius: 8;
+}
+
+.correct {
+  background-color: $correct;
+  color: white;
+  border-radius: 8;
+}
+
+.incorrect {
+  background-color: $incorrect;
+  color: white;
+  border-radius: 8;
+}
+
+.skipped {
+  background-color: $skipped;
+  color: white;
+  border-radius: 8;
+}
+
+.tbd {
+  background-color: $tbd;
+  color: white;
+  border-radius: 8;
+}
+
+.drawer-header {
+  color: white;
+  font-size: 20;
+  horizontal-align: left;
+  vertical-align: bottom;
+}
+
+.exam-date-failed {
+  color: $incorrect;
+  font-size: 12;
+  margin-top: 5;
+  margin-left: 5;
+  margin-bottom: 5;
+}
+
+.result-count-failed {
+  color: $incorrect;
+  font-size: 16;
+  font-weight: bold;
+  margin-left: 5;
+  margin-bottom: 10;
+}
+
+.result-background {
+  color: $accent-light;
+}
+
+.exam-date-passed {
+  color: $passed;
+  font-size: 11;
+  margin-top: 5;
+  margin-left: 5;
+  margin-bottom: 5;
+}
+
+.result-count-passed {
+  color: $passed;
+  font-size: 16;
+  font-weight: bold;
+  margin-left: 5;
+  margin-bottom: 10;
+}
+
+.progress-result-passed {
+  color: $passed;
+  font-weight: bold;
+  font-size: 16;
+}
+
+.progress-result-failed {
+  color: $incorrect;
+  font-weight: bold;
+  font-size: 16;
+}
+
+.progress-background {
+  background-color: white;
+  color: white;
+}
+
+.item-title {
+  background-color: rgba(0, 0, 0, 0.4);
+  vertical-align: bottom;
+  padding: 16;
+  font-size: 20;
+}
+
+.exam-date-failed {
+  color: $incorrect;
+  font-size: 12;
+  margin-top: 5;
+  margin-left: 5;
+  margin-bottom: 5;
+}
+
+.result-count-failed {
+  color: $incorrect;
+  font-size: 16;
+  font-weight: bold;
+  margin-left: 5;
+  margin-bottom: 10;
+}
+
+.result-background {
+  color: $accent-light;
+}
+
+.exam-date-passed {
+  color: $passed;
+  font-size: 11;
+  margin-top: 5;
+  margin-left: 5;
+  margin-bottom: 5;
+}
+
+.result-count-passed {
+  color: $passed;
+  font-size: 16;
+  font-weight: bold;
+  margin-left: 5;
+  margin-bottom: 10;
+}
+
+.progress-result-passed {
+  color: $passed;
+  font-weight: bold;
+  font-size: 16;
+}
+
+.progress-result-failed {
+  color: $incorrect;
+  font-weight: bold;
+  font-size: 16;
+}
+
+.progress-background {
+  background-color: white;
+  color: white;
+}
+
+.progress-heading {
+  background-image: linear-gradient(to right, $accent-light, $accent-dark);
+  color: white;
+}
+
+.item-title {
+  background-color: rgba(0, 0, 0, 0.4);
+  vertical-align: bottom;
+  padding: 16;
+  font-size: 20;
+}
+
+.paragraph {
+  font-size: 14;
+  margin-top: 10;
+}
+
+.faq-question {
+  @extend .paragraph;
+  font-weight: bold;
+}
+
+.faq-answer {
+  font-size: 14;
+}
+
+.bullet-paragraph {
+  @extend .paragraph;
+  margin-left: 10;
+  margin-top: 5;
+}
+
+.bullet {
+  @extend .paragraph;
+  color: $bullet;
+  margin-left: 10;
+}
+
+.status-incomplete {
+  @extend .paragraph;
+  font-weight: bold;
+  color: $incorrect;
+}
+
+.status-complete {
+  @extend .paragraph;
+  font-weight: bold;
+  color: $correct;
+}
+
+.switch-incomplete {
+  margin-left: 5;
+  margin-top: 10;
+  background-color: $incorrect;
+}
+
+.switch-complete {
+  margin-left: 5;
+  margin-top: 10;
+  background-color: $correct;
+}
+
+.chapter-incomplete {
+  background-color: $incorrect;
+  color: white;
+}
+
+.chapter-complete {
+  background-color: $correct;
+  color: white;
+}
+
+.c-white {
+  color: white;
+}
+
+.progressbar {
+  height: 30;
+  margin: 10;
+  border-radius: 10;
+  background: #ECEFF1;
+}
+
+.progressbar-value {
+  background: $progressbar-value;
+}
+
+.mesh-background {
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.category-background {
+  background-color: #ffffff;
+  border-radius: 5;
+  border-color: #2d7bc1;
+}
+
+.category-background-selected {
+  background-color: #44ffff;
+  border-radius: 5;
+  border-color: #2d7bc1;
+}
+
+.category-todo-heading {
+  color: $todo;
+  font-size: 15;
+  font-weight: bold;
+  margin-left: 5;
+}
+
+.category-stats {
+  color: black;
+  font-size: 16;
+}
+
+.category-complete-heading {
+  color: $complete;
+  font-size: 16;
+  font-weight: bold;
+  margin-left: 5;
+}
+
+.badge {
+  border-radius: 50%;
+  margin-right: 10;
+  vertical-align: middle;
+  text-align: center;
+  background-color: $category-icon;
+}
+
+.category-list-item {
+  background-color: $category-background;
+  border-color: $category-background;
+  border-radius: 10;
+  border-width: 1;
+  padding: 5 15;
+  margin-bottom: 10;
+}
+
+.category-list-item-selected {
+  background-color: $selected-category;
+  border-color: $selected-category;
+  border-radius: 10;
+  border-width: 1;
+  padding: 5 15;
+  margin-bottom: 10;
+}
+
+.icon-selected {
+  color: #3A53FF;
+  vertical-align: middle;
+}

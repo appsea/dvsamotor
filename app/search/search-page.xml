@@ -1,0 +1,98 @@
+<Page
+        class="page"
+        loaded="onPageLoaded"
+        navigatingTo="onNavigatingTo"
+        navigatedFrom="onNavigatedFrom"
+        xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <!--
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <!--
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem tap="onDrawerButtonTap">
+            <ActionItem.actionView>
+                <StackLayout orientation="horizontal">
+                    <Label class="action-bar-title fa m-r-4" text="&#xf002;" tap="toggleSearch"></Label>
+                </StackLayout>
+            </ActionItem.actionView>
+        </ActionItem>
+        <Label class="action-bar-title" text="Search Questions"></Label>
+    </ActionBar>
+
+    <GridLayout rows="auto, *, auto">
+        <SearchBar row="0" hint="Search Questions..." id="searchBar" text="{{ searchPhrase }}" submit="{{ onSearchSubmit }}" clear="{{ clear }}" class="{{ searching ? 'searching search-bar' : 'not-searching search-bar' }}" visibility="{{ searching ? 'visible': 'collapsed'}}"/>
+        <GridLayout row="1" rows="auto, *">
+            <ListView  row="1" id="listView" class="margin" items="{{ questions }}" separatorColor="blue" itemTemplateSelector="$index">
+                <ListView.itemTemplate>
+                    <StackLayout>
+                        <Label marginTop="20dpi" textAlignment="center" class="font-weight-bold">
+                            <Label.formattedText>
+                                <FormattedString>
+                                    <FormattedString.spans>
+                                        <span text="Question " />
+                                        <span text="{{ $index + 1 }}"/>
+                                        <span text=" Of "/>
+                                        <span text="{{$parents['ListView'].questions, $parents['ListView'].questions.length }}" />
+                                    </FormattedString.spans>
+                                </FormattedString>
+                            </Label.formattedText>
+                        </Label>
+                        <Label text="{{ prashna.text }}" textWrap="true"/>
+                        <image src="{{ prashna.image }}" class="m-10 question-image" minHeight="40%" visibility="{{ prashna.image ? 'visible' : 'collapsed' }}" stretch="aspectFit"/>
+                        <GridLayout columns="*,*" rows="auto,auto" visibility="{{ options[0].image ? 'visible' : 'collapsed' }}">
+                            <StackLayout row="0" col="0" class="{{ options[0].correct ? 'correct m-5' :'not-selected-image'}}" >
+                                <image src="{{ options[0].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="0" col="1" class="{{ options[1].correct ? 'correct m-5' :'not-selected-image'}}">
+                                <image src="{{ options[1].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="1" col="0" class="{{ options[2].correct ? 'correct m-5' :'not-selected-image'}}">
+                                <image src="{{ options[2].image }}" class="m-5" />
+                            </StackLayout>
+                            <StackLayout row="1" col="1" class="{{ options[3].correct ? 'correct m-5' :'not-selected-image'}}">
+                                <image src="{{ options[3].image }}" class="m-5" />
+                            </StackLayout>
+                        </GridLayout>
+
+                        <Repeater items="{{ options }}" row="1" visibility="{{ options[0].description ? 'visible' : 'collapsed' }}">
+                            <Repeater.itemTemplate>
+                                <GridLayout columns="*" class="{{ !correct? 'not-selected m-y-5': 'correct m-y-5'}}">
+                                    <Label col="0" text="{{ description }}"
+                                           class="{{ !correct? 'not-selected m-y-10 m-x-2': 'correct m-y-10 m-x-2'}}"
+                                           textWrap="true"/>
+                                </GridLayout>
+                            </Repeater.itemTemplate>
+                        </Repeater>
+                        <Label text="Explanation: " style="font-weight: bold; margin-top: 10dpi"  textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
+                        <Label text="{{ explanation }}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
+                    </StackLayout>
+                </ListView.itemTemplate>
+            </ListView>
+            <Label textWrap="true" textAlignment="center" marginTop="20dpi" row="1" visibility="{{ questions.length === 0 && searchPhrase.length > 0 ? 'visible' : 'collapsed' }}" class="margin" horizontalAlignment="center" verticalAlignment="center">
+                <label.formattedText>
+                    <formattedString>
+                        <formattedString.spans>
+                            <span text="No Questions matched"/>
+                        </formattedString.spans>
+                    </formattedString>
+                </label.formattedText>
+            </Label>
+            <Label textWrap="true" textAlignment="center" marginTop="20dpi" row="1" visibility="{{ questions.length === 0 && searchPhrase.length === 0 ? 'visible' : 'collapsed' }}" class="margin" horizontalAlignment="center" verticalAlignment="center">
+                <label.formattedText>
+                    <formattedString>
+                        <formattedString.spans>
+                            <span text="Enter atleast three characters"/>
+                        </formattedString.spans>
+                    </formattedString>
+                </label.formattedText>
+            </Label>
+        </GridLayout>
+    </GridLayout>
+</Page>

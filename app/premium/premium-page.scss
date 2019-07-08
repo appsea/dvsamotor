@@ -1,0 +1,39 @@
+.feature {
+  font-size: 16;
+  color: white;
+  font-weight: bold;
+}
+
+
+.description {
+  font-size: 12;
+  color: white;
+}
+
+.vc {
+  vertical-align: middle;
+}
+
+.tick {
+  vertical-align: middle;
+}
+
+
+.gcenter {
+  horizontal-align: center;
+}
+
+.m-l {
+  margin-left: 40;
+}
+
+.rotate {
+  animation-name: rotation;
+  animation-duration: .5ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-90deg); }
+}

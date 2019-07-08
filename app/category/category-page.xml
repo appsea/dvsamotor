@@ -1,0 +1,79 @@
+<Page
+        class="page"
+        loaded="onPageLoaded"
+        navigatingTo="onNavigatingTo"
+        xmlns="http://schemas.nativescript.org/tns.xsd"
+        xmlns:Card="nativescript-cardview" xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <!--
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <!--
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <Label class="action-bar-title">
+            <label.formattedText>
+                <formattedString>
+                    <formattedString.spans>
+                        <span text="Categories ("/>
+                        <span text="{{ selected }}"/>
+                        <span text="/"/>
+                        <span text="{{ total }}"/>
+                        <span text=")"/>
+                    </formattedString.spans>
+                </formattedString>
+            </label.formattedText>
+        </Label>
+    </ActionBar>
+    <GridLayout rows="*, auto">
+        <ListView row="0" id="categoryList" class="list-group m-10" items="{{ categories }}" separatorColor="white" itemTap="selectCategory">
+            <ListView.itemTemplate>
+                <Card:CardView class="{{ selected? 'category-list-item-selected m-5 cardStyle': 'category-list-item m-5 cardStyle'}}" margin="10" elevation="30" radius="5">
+                    <GridLayout columns="auto, *, auto" class="m-10">
+                        <StackLayout col="0" height="50" width="50" class="badge mr-10">
+                            <Label text="{{ icon }}" class="fa c-white"></Label>
+                        </StackLayout>
+                        <StackLayout col="1" verticalAlignment="center">
+                            <Label text="{{name}}" class="{{ attempted.length === questionNumbers.length && percentage > 40  ? 'category-complete-heading':'category-todo-heading' }}" textWrap="true"/>
+                            <Label visibility="{{ attempted.length>0 ? 'visible' : 'collapsed' }}"
+                                   class="category-stats">
+                                <label.formattedText>
+                                    <formattedString>
+                                        <formattedString.spans>
+                                            <span text="{{attempted.length}}"/>
+                                            <span text="/"/>
+                                            <span text="{{ questionNumbers.length }}"/>
+                                            <span text=" Answered, "/>
+                                            <span text=" {{ percentage }} "/>
+                                            <span text="% Accuracy"/>
+                                        </formattedString.spans>
+                                    </formattedString>
+                                </label.formattedText>
+                            </Label>
+                            <Label visibility="{{ attempted.length===0 ? 'visible' : 'collapsed' }}"
+                                   class="category-stats">
+                                <label.formattedText>
+                                    <formattedString>
+                                        <formattedString.spans>
+                                            <span text="{{ questionNumbers.length }}"/>
+                                            <span text=" Questions"/>
+                                        </formattedString.spans>
+                                    </formattedString>
+                                </label.formattedText>
+                            </Label>
+                        </StackLayout>
+                        <Label col="2" text="&#xf00c;" class="fa icon-selected" visibility="{{ selected ? 'visible' : 'collapsed' }}"/>
+                    </GridLayout>
+                </Card:CardView>
+            </ListView.itemTemplate>
+        </ListView>
+        <StackLayout row="1" visibility="{{ selected > 0 ? 'visible' : 'collapsed' }}">
+            <Button id="startButton" class="btn btn-primary t-18" text="Practice" tap="practice" width="80%"/>
+        </StackLayout>
+    </GridLayout>
+</Page>
