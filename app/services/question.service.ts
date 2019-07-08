@@ -259,7 +259,7 @@ export class QuestionService {
                     if (Number(playStoreVersion) > Number(version)) {
                         dialogs.confirm({
                             title: "Notification",
-                            message: "A latest version of DVSA Theory Test Kit is now available on play store.",
+                            message: "A latest version of Motorcycle Theory Kit is now available on play store.",
                             okButtonText: "Upgrade",
                             cancelButtonText: "Remind me Later"
                         }).then((proceed) => {

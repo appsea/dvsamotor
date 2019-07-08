@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
 	package="__PACKAGE__"
-	android:versionCode="10034"
+	android:versionCode="10001"
 	android:versionName="1.0.0">
 
 	<supports-screens
@@ -27,7 +27,7 @@
 		android:label="@string/app_name"
 		android:theme="@style/AppTheme">
 
-		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-9082814869788754~1821006498" />
+		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-9082814869788754~3618514994" />
 
 		<activity
 			android:name="com.tns.NativeScriptActivity"

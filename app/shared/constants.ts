@@ -1,8 +1,8 @@
 export const MONICA = "U2FsdGVkX19T3zgfR+APRRTxPypsm+rG/bo9J9M5kPwbYkUmx8EPasLyXEBglKMKdzGurLjvZdco5aKqsj5PeA==";
 export const GUPIT = "dvsamotorcycle";
-export const BANNER_AD_ID = "ca-app-pub-9082814869788754/2495314982";
-export const INTERSTITIAL_AD_ID = "ca-app-pub-9082814869788754/8631803339";
-export const REWARD_AD_ID = "ca-app-pub-9082814869788754/8649659798";
+export const BANNER_AD_ID = "ca-app-pub-9082814869788754/6053106643";
+export const INTERSTITIAL_AD_ID = "ca-app-pub-9082814869788754/9080146111";
+export const REWARD_AD_ID = "ca-app-pub-9082814869788754/6453982770";
 export const TOTAL_QUESTIONS = 734;
 export const PREMIUM = "PREMIUM";
 export const WRONG_QUESTION = "WRONG_QUESTION";
