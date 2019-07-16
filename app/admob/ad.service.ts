@@ -1,15 +1,9 @@
 import { isIOS, screen } from "tns-core-modules/platform";
+import { CoolAds } from "~/admob/coolAds";
 import { QuestionViewModel } from "~/question/question-view-model";
+import { HttpService } from "~/services/http.service";
 import { PersistenceService } from "~/services/persistence.service";
-import {
-    AD_SIZE,
-    createBanner,
-    createInterstitial,
-    hideBanner,
-    preloadInterstitial,
-    showInterstitial
-} from "../admob/ads.js";
-import { HttpService } from "../services/http.service";
+import { AD_SIZE } from "../admob/admob-common.js";
 import * as constantsModule from "../shared/constants";
 
 export class AdService {
@@ -56,7 +50,7 @@ export class AdService {
 
     hideAd() {
         if (this._showAd) {
-            hideBanner().then(
+            CoolAds.getInstance().hideBanner().then(
                 () => console.log("Banner hidden"),
                 (error) => console.error("Error hiding banner: " + error)
             );
@@ -103,7 +97,7 @@ export class AdService {
 
     doShowInterstitial(): void {
         if (this._showAd) {
-            showInterstitial().then(
+            CoolAds.getInstance().showInterstitial().then(
                 () => console.log("Shown interstetial..."),
                 (error) => console.log("Error showing interstitial", error)
             );
@@ -112,7 +106,7 @@ export class AdService {
 
     doPreloadInterstitial(resolve, reject): void {
         if (this._showAd) {
-            preloadInterstitial({
+            CoolAds.getInstance().preloadInterstitial({
                 testing: AdService._testing,
                 iosInterstitialId: constantsModule.INTERSTITIAL_AD_ID,
                 androidInterstitialId: constantsModule.INTERSTITIAL_AD_ID,
@@ -135,7 +129,7 @@ export class AdService {
 
     doCreateInterstitial(): void {
         if (this._showAd) {
-            createInterstitial({
+            CoolAds.getInstance().createInterstitial({
                 testing: AdService._testing,
                 iosInterstitialId: constantsModule.INTERSTITIAL_AD_ID,
                 androidInterstitialId: constantsModule.INTERSTITIAL_AD_ID,
@@ -162,8 +156,20 @@ export class AdService {
         }, 2000);
     }
 
+    preloadVideoAd(arg, rewardCB, reload, afterAdLoaded): Promise<any> {
+        return CoolAds.getInstance().preloadVideoAd(arg, rewardCB, reload, afterAdLoaded);
+    }
+
+    showVideoAd(): Promise<any> {
+        return CoolAds.getInstance().showVideoAd();
+    }
+
+    adLoaded(): boolean {
+        return CoolAds.getInstance().adLoaded();
+    }
+
     private createBanner(size: AD_SIZE): Promise<void> {
-        return createBanner({
+        return CoolAds.getInstance().createBanner({
             testing: AdService._testing,
             // if this 'view' property is not set, the banner is overlayed on the current top most view
             // view: ..,

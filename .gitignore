@@ -10,10 +10,10 @@ platforms/
 *.js
 !webpack.config.js
 *.css
-!ads.js
+app/admob/*.js
+!ads-android.js
+!ads-ios.js
 !admob-common.js
-!app/admob/*.js
-app/admob/ad.service.js
 
 # Logs
 logs

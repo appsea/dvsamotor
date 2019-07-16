@@ -10,7 +10,6 @@ import { QuestionUtil } from "~/services/question.util";
 import { ConnectionService } from "~/shared/connection.service";
 import { IPracticeStats, IResult } from "~/shared/questions.model";
 import { QuizUtil } from "~/shared/quiz.util";
-import * as rewardModule from "../admob/ads.js";
 import * as constantsModule from "../shared/constants";
 import * as navigationModule from "../shared/navigation";
 
@@ -85,7 +84,7 @@ export class SummaryViewModel extends Observable {
     }
 
     get adLoaded() {
-        return rewardModule.adLoaded();
+        return AdService.getInstance().adLoaded();
     }
 
     get error() {
@@ -137,8 +136,8 @@ export class SummaryViewModel extends Observable {
     }
 
     preloadVideoAd() {
-        if (!PersistenceService.getInstance().isPremium() && !rewardModule.adLoaded()) {
-            rewardModule.preloadVideoAd({
+        if (!PersistenceService.getInstance().isPremium() && !AdService.getInstance().adLoaded()) {
+            AdService.getInstance().preloadVideoAd({
                 testing: AdService._testing,
                 iosInterstitialId: constantsModule.REWARD_AD_ID, // add your own
                 androidInterstitialId: constantsModule.REWARD_AD_ID, // add your own
@@ -229,7 +228,7 @@ export class SummaryViewModel extends Observable {
     }
 
     private showVideoAd() {
-        rewardModule.showVideoAd().then(
+        AdService.getInstance().showVideoAd().then(
             () => {
                 console.log("interstitial showing");
             },
