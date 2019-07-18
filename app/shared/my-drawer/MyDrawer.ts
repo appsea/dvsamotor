@@ -73,7 +73,7 @@ export function goPremium(args: EventData): void {
 }
 
 export function privacyPolicy(args: EventData): void {
-    utils.openUrl("https://github.com/exuberantavatar/basesasquiz/blob/master/PrivacyPolicy.md");
+    utils.openUrl("https://github.com/exuberantavatar/ukmotorcycle/blob/master/PrivacyPolicy.md");
 }
 
 export function logout(args: EventData): void {
