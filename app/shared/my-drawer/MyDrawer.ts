@@ -8,6 +8,7 @@ import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
 import { SettingsService } from "~/services/settings.service";
 import { ConnectionService } from "../connection.service";
 import { MyDrawerViewModel } from "./MyDrawer-view-model";
+import * as utils from "tns-core-modules/utils/utils";
 
 /* ***********************************************************
 * Use the "loaded" event handler of the wrapping layout element to bind the view model to your view.
@@ -69,6 +70,10 @@ export function goPremium(args: EventData): void {
         dialogs.alert("Please connect to internet for the purchase!!");
     }
 
+}
+
+export function privacyPolicy(args: EventData): void {
+    utils.openUrl("https://github.com/exuberantavatar/basesasquiz/blob/master/PrivacyPolicy.md");
 }
 
 export function logout(args: EventData): void {
