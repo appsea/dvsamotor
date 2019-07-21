@@ -5,6 +5,7 @@ import { EventData } from "tns-core-modules/data/observable";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import { topmost } from "tns-core-modules/ui/frame";
 import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
+import * as utils from "tns-core-modules/utils/utils";
 import { SettingsService } from "~/services/settings.service";
 import { ConnectionService } from "../connection.service";
 import { MyDrawerViewModel } from "./MyDrawer-view-model";
@@ -69,6 +70,10 @@ export function goPremium(args: EventData): void {
         dialogs.alert("Please connect to internet for the purchase!!");
     }
 
+}
+
+export function privacyPolicy(args: EventData): void {
+    utils.openUrl("https://github.com/exuberantavatar/ukmotorcycle/blob/master/PrivacyPolicy.md");
 }
 
 export function logout(args: EventData): void {

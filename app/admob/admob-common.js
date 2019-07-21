@@ -11,6 +11,30 @@ admob.AD_SIZE = {
     FLUID: "FLUID"
 };
 
+admob._getBannerType = function (size) {
+    if (size == admob.AD_SIZE.BANNER) {
+        return com.google.android.gms.ads.AdSize.BANNER;
+    } else if (size == admob.AD_SIZE.LARGE_BANNER) {
+        return com.google.android.gms.ads.AdSize.LARGE_BANNER;
+    } else if (size == admob.AD_SIZE.MEDIUM_RECTANGLE) {
+        return com.google.android.gms.ads.AdSize.MEDIUM_RECTANGLE;
+    } else if (size == admob.AD_SIZE.FULL_BANNER) {
+        return com.google.android.gms.ads.AdSize.FULL_BANNER;
+    } else if (size == admob.AD_SIZE.FLUID) {
+        return com.google.android.gms.ads.AdSize.FLUID;
+    } else if (size == admob.AD_SIZE.LEADERBOARD) {
+        // doesn't seem to work on Android - using large instead
+        //return com.google.android.gms.ads.AdSize.LEADERBOARD;
+        return com.google.android.gms.ads.AdSize.LARGE_BANNER;
+    } else if (size == admob.AD_SIZE.SKYSCRAPER) {
+        return com.google.android.gms.ads.AdSize.WIDE_SKYSCRAPER;
+    } else if (size == admob.AD_SIZE.SMART_BANNER) {
+        return com.google.android.gms.ads.AdSize.SMART_BANNER;
+    } else {
+        return null;
+    }
+};
+
 admob.defaults = {
     margins: {
         top: -1,

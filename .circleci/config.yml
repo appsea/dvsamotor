@@ -32,12 +32,11 @@ jobs:
       # - run: bash ./.circleci/download.sh
       - run: echo $BASE_64_KEY | base64 -d > $KEYSTORE
       - run: echo $JSON > key.json
-      - run: npm install nativescript-dev-sass --save-dev
       - run: npm run tsc
       - run: echo yes | sudo npm install nativescript -g --unsafe-perm
       #- run: npm install
       - run: echo yes | tns setup
       - run: echo yes | tns cloud setup
       - run: tns doctor
-      - run: echo -n $'\031' | tns build android --env.snapshot --env.uglify --release --aab --key-store-path $KEYSTORE --key-store-password $KEYSTORE_PASSWORD --key-store-alias sasquiz --key-store-alias-password $KEYSTORE_PASSWORD --copy-to dvsa.aab
+      - run: echo -n $'\031' | tns build android --env.snapshot --env.monica=$MONICA --env.gupit=$GUPIT --release --aab --key-store-path $KEYSTORE --key-store-password $KEYSTORE_PASSWORD --key-store-alias sasquiz --key-store-alias-password $KEYSTORE_PASSWORD --copy-to dvsa.aab
       - run: java -jar release-manager-1.1.jar -key "key.json" -file "dvsa.aab" -track "beta" -name "UK Motorcycle Theory" -notes "<en_US>Thank you for using UK Motorcycle Theory. We keep bringing new updates to make user experience better. This times it is loads of improvements. We strongly recommend you to keep UK Motorcycle Theory updated. We love to hear back to make UK Motorcycle Theory better than what it is today so please share feedback on exuberant.avatar@gmail.com and rate us on play store. Thank you again!!!</en_US>" -packageName=exuberant.dvsa.mttk

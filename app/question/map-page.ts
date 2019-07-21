@@ -1,4 +1,4 @@
-import { GridItemEventData } from "nativescript-grid-view";
+import { GridItemEventData } from "~/nativescript-grid-view";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "tns-core-modules/application";
 import { EventData, Observable } from "tns-core-modules/data/observable";
