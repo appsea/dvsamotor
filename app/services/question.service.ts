@@ -149,6 +149,7 @@ export class QuestionService {
     }
 
     getQuestion(value: number): Promise<IQuestion> {
+        this.checkQuestionUpdate();
         return new Promise<IQuestion>((resolve, reject) => {
             if (this.questions.length === 0) {
                 this.questions = this._settingsService.readQuestions();
@@ -178,6 +179,7 @@ export class QuestionService {
     }
 
     saveQuestions(questions: Array<IQuestion>): void {
+        this.questions = questions;
         const json: string = JSON.stringify(questions);
         appSettings.setString(constantsModule.QUESTIONS, json);
         appSettings.setNumber(constantsModule.QUESTIONS_SIZE, questions.length);
@@ -227,7 +229,7 @@ export class QuestionService {
                     this._settingsService.saveQuestionVersion(Number(latestQuestionVersion));
                 }
             });
-            this.checkUpdates();
+            this.checkApplicationUpdate();
             this._checked = true;
         }
     }
@@ -252,14 +254,15 @@ export class QuestionService {
         });
     }
 
-    private checkUpdates() {
+    private checkApplicationUpdate() {
         if (!this._checked) {
+            this._checked = true;
             HttpService.getInstance().checkPlayStoreVersion().then((playStoreVersion: string) => {
                 appVersion.getVersionCode().then((version: string) => {
                     if (Number(playStoreVersion) > Number(version)) {
                         dialogs.confirm({
                             title: "Notification",
-                            message: "A latest version of Motorcycle Theory Kit is now available on play store.",
+                            message: "Better version of Motorcycle Theory Kit is now available on play store.",
                             okButtonText: "Upgrade",
                             cancelButtonText: "Remind me Later"
                         }).then((proceed) => {

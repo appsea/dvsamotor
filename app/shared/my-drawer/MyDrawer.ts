@@ -5,10 +5,10 @@ import { EventData } from "tns-core-modules/data/observable";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import { topmost } from "tns-core-modules/ui/frame";
 import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
+import * as utils from "tns-core-modules/utils/utils";
 import { SettingsService } from "~/services/settings.service";
 import { ConnectionService } from "../connection.service";
 import { MyDrawerViewModel } from "./MyDrawer-view-model";
-import * as utils from "tns-core-modules/utils/utils";
 
 /* ***********************************************************
 * Use the "loaded" event handler of the wrapping layout element to bind the view model to your view.

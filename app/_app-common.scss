@@ -65,6 +65,12 @@ ActionBar .flagged {
   color: $flag-color;
 }
 
+ActionBar .action-bar-icons {
+  horizontal-align: right;
+  color: white;
+  margin-right: 10;
+}
+
 Label {
   color: black;
   font-size: 18;

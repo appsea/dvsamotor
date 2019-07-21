@@ -77,13 +77,13 @@ Feel free to customize layouts and components to change how your app drawer look
                 <Label row="60" col="0" text="&#xf052;" class="fa t-14"/>
                 <Label row="0" col="1" text="Exit" class="p-r-10" />
             </GridLayout>
-            <Label row="0" col="1" tap="privacyPolicy">
+            <Label row="0" col="1" tap="privacyPolicy" class="m-l-15 m-b-15" >
                 <label.formattedText>
                     <formattedString>
                         <formattedString.spans>
-                            <span text="Privacy Policy" class="m-l-15 m-b-15" style="font-size:12; color: blue"/>
+                            <span text="Privacy Policy" style="font-size:12; color: blue;text-decoration: underline;"></span>
                             <span text=" . "/>
-                            <span text="{{ version }}" class="m-l-15 m-b-15" style="font-size:10; color: blue"/>
+                            <span text="{{ version }}" style="font-size:10; color: blue"/>
                         </formattedString.spans>
                     </formattedString>
                 </label.formattedText>
