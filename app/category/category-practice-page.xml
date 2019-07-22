@@ -5,38 +5,32 @@
         xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
-        <!--
-        Use the NavigationButton as a side-drawer button in Android
-        because ActionItems are shown on the right side of the ActionBar
-        -->
-        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
-        <!--
-        Use the ActionItem for IOS with position set to left. Using the
-        NavigationButton as a side-drawer button in iOS is not possible,
-        because its function is to always navigate back in the application.
-        -->
-        <ActionItem tap="onDrawerButtonTap">
-            <ActionItem.actionView>
-                <StackLayout orientation="horizontal">
-                    <Label class="action-bar-title fa" text="&#xf044;" tap="goToEditPage"></Label>
-                    <Label class="{{ (question.flagged)? 'action-bar-title fa flagged': 'action-bar-title fa' }}"
-                           text="&#xf024;" tap="flag"></Label>
-                </StackLayout>
-            </ActionItem.actionView>
-        </ActionItem>
-
-        <Label class="action-bar-title">
-            <label.formattedText>
-                <formattedString>
-                    <formattedString.spans>
-                        <span text="Question "/>
-                        <span text="{{ questionNumber }}"/>
-                        <span text="/"/>
-                        <span text="{{ totalQuestions }}"/>
-                    </formattedString.spans>
-                </formattedString>
-            </label.formattedText>
-        </Label>
+        <NavigationButton visibility="collapsed"></NavigationButton>
+        <GridLayout columns="auto,*,auto" ios:padding="0 10" height="100%"
+                    width="100%">
+            <StackLayout col="0" tap="onDrawerButtonTap" id="stack" class="stack">
+                <Label class="bar bar1" id="bar1" />
+                <Label class="bar bar2" id="bar2" />
+                <Label class="bar bar3" id="bar3" />
+            </StackLayout>
+            <Label col="1" class="action-bar-title" horizontalAlignment="center">
+                <label.formattedText>
+                    <formattedString>
+                        <formattedString.spans>
+                            <span text="Question "/>
+                            <span text="{{ questionNumber }}"/>
+                            <span text="/"/>
+                            <span text="{{ totalQuestions }}"/>
+                        </formattedString.spans>
+                    </formattedString>
+                </label.formattedText>
+            </Label>
+            <StackLayout col="2" orientation="horizontal">
+                <Label class="action-bar-title fa" text="&#xf044;" tap="goToEditPage"></Label>
+                <Label class="{{ (question.flagged)? 'action-bar-title fa flagged': 'action-bar-title fa' }}"
+                       text="&#xf024;" tap="flag"></Label>
+            </StackLayout>
+        </GridLayout>
     </ActionBar>
     <DockLayout stretchLastChild="true">
         <StackLayout dock="top" height="20dpi">

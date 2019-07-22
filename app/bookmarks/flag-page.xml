@@ -5,37 +5,31 @@
         xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
-        <!--
-        Use the NavigationButton as a side-drawer button in Android
-        because ActionItems are shown on the right side of the ActionBar
-        -->
-        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
-        <!--
-        Use the ActionItem for IOS with position set to left. Using the
-        NavigationButton as a side-drawer button in iOS is not possible,
-        because its function is to always navigate back in the application.
-        -->
-        <ActionItem tap="onDrawerButtonTap">
-            <ActionItem.actionView>
-                <StackLayout orientation="horizontal">
-                    <Label class="action-bar-title fa" text="&#xf044;" tap="goToEditPage"></Label>
-                    <Label class="{{ (question.flagged)? 'action-bar-title fa flagged': 'action-bar-title fa' }}" text="&#xf024;" tap="flag"></Label>
-                </StackLayout>
-            </ActionItem.actionView>
-        </ActionItem>
-
-        <Label class="action-bar-title" visibility="{{ length>0 ? 'visible' : 'collapsed' }}">
-            <label.formattedText>
-                <formattedString>
-                    <formattedString.spans>
-                        <span text="Question "/>
-                        <span text="{{ questionNumber }}"/>
-                        <span text=" of "/>
-                        <span text=" {{ length }}"/>
-                    </formattedString.spans>
-                </formattedString>
-            </label.formattedText>
-        </Label>
+        <NavigationButton visibility="collapsed"></NavigationButton>
+        <GridLayout columns="auto,*,auto" ios:padding="0 10" height="100%"
+                    width="100%">
+            <StackLayout col="0" tap="onDrawerButtonTap" id="stack" class="stack">
+                <Label class="bar bar1" id="bar1" />
+                <Label class="bar bar2" id="bar2" />
+                <Label class="bar bar3" id="bar3" />
+            </StackLayout>
+            <Label col="1" class="action-bar-title" horizontalAlignment="center">
+                <label.formattedText>
+                    <formattedString>
+                        <formattedString.spans>
+                            <span text="Question "/>
+                            <span text="{{ questionNumber }}"/>
+                            <span text="/"/>
+                            <span text=" {{ length }}"/>
+                        </formattedString.spans>
+                    </formattedString>
+                </label.formattedText>
+            </Label>
+            <StackLayout col="2" orientation="horizontal">
+                <Label class="action-bar-title fa" text="&#xf044;" tap="goToEditPage"></Label>
+                <Label class="{{ (question.flagged)? 'action-bar-title fa flagged': 'action-bar-title fa' }}" text="&#xf024;" tap="flag"></Label>
+            </StackLayout>
+        </GridLayout>
     </ActionBar>
 
     <DockLayout stretchLastChild="true" visibility="{{ question.number ? 'visible' : 'collapsed' }}">
@@ -67,45 +61,35 @@
                 <GridLayout columns="*,*" rows="auto,auto" style="margin-top:5" visibility="{{ options[0].image ? 'visible' : 'collapsed' }}">
                     <StackLayout row="0" col="0"
                                  class="{{ (options[0].show && options[0].correct)? 'correct' : (options[0].show && options[0].selected && !options[0].correct)? 'incorrect': 'not-selected-image' }}"
-                                 tap="selectOption">
-                        <image src="{{ options[0].image }}" tap="firstOption" class="m-5"
-
-                               visibility="{{ options[0].image ? 'visible' : 'collapsed' }}"/>
+                                 tap="firstOption">
+                        <image src="{{ options[0].image }}" class="m-5" visibility="{{ options[0].image ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>
                     <StackLayout row="0" col="1"
                                  class="{{ (options[1].show && options[1].correct)? 'correct' : (options[1].show && options[1].selected && !options[1].correct)? 'incorrect': 'not-selected-image' }}"
-                                 tap="selectOption">
-                        <image src="{{ options[1].image }}" tap="secondOption" class="m-5"
-
-                               visibility="{{ options[1].image ? 'visible' : 'collapsed' }}"/>
+                                 tap="secondOption">
+                        <image src="{{ options[1].image }}" class="m-5" visibility="{{ options[1].image ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>
                     <StackLayout row="1" col="0"
                                  class="{{ (options[2].show && options[2].correct)? 'correct' : (options[2].show && options[2].selected && !options[2].correct)? 'incorrect': 'not-selected-image' }}"
-                                 tap="selectOption">
-                        <image src="{{ options[2].image }}" tap="thirdOption" class="m-5"
-
-                               visibility="{{ options[2].image ? 'visible' : 'collapsed' }}"/>
+                                 tap="thirdOption">
+                        <image src="{{ options[2].image }}" class="m-5" visibility="{{ options[2].image ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>
                     <StackLayout row="1" col="1"
                                  class="{{ (options[3].show && options[3].correct)? 'correct' : (options[3].show && options[3].selected && !options[3].correct)? 'incorrect': 'not-selected-image' }}"
-                                 tap="selectOption">
-                        <image src="{{ options[3].image }}" tap="fourthOption" class="m-5"
-
-                               visibility="{{ options[3].image ? 'visible' : 'collapsed' }}"/>
+                                 tap="fourthOption">
+                        <image src="{{ options[3].image }}" class="m-5" visibility="{{ options[3].image ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>
                 </GridLayout>
 
                 <Repeater items="{{ options }}" row="1" id="optionList" visibility="{{ options[0].description ? 'visible' : 'collapsed' }}">
                     <Repeater.itemTemplate>
-                        <GridLayout columns="auto,*" class="{{ (show && correct)? 'correct m-y-5' : (show && selected && !correct)? 'incorrect m-y-5': 'not-selected m-y-5' }}">
+                        <GridLayout columns="auto,*" tap="selectOption" class="{{ (show && correct)? 'correct m-y-5' : (show && selected && !correct)? 'incorrect m-y-5': 'not-selected m-y-5' }}">
                             <Label col="0" text="{{ tag + '. ' }}"
                                    class="{{ (show && correct)? 'correct' : (show && selected && !correct)? 'incorrect': 'not-selected' }}"
-                                   textWrap="true" marginTop="10dpi" marginBottom="10dpi" tap="selectOption"
-                                  />
+                                   textWrap="true" marginTop="10dpi" marginBottom="10dpi"/>
                             <Label col="1" text="{{ description }}"
                                    class="{{ (show && correct)? 'correct' : (show && selected && !correct)? 'incorrect': 'not-selected' }}"
-                                   textWrap="true" marginTop="10dpi" marginBottom="10dpi" tap="selectOption"
-                                  />
+                                   textWrap="true" marginTop="10dpi" marginBottom="10dpi" />
                         </GridLayout>
                     </Repeater.itemTemplate>
                 </Repeater>

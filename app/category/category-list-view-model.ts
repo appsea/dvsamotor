@@ -52,7 +52,6 @@ export class CategoryListViewModel extends Observable {
 
     showDrawer() {
         QuestionViewModel.showDrawer();
-        AdService.getInstance().hideAd();
     }
 
     practice() {

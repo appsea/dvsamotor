@@ -67,7 +67,6 @@ export function onActivityBackPressedEvent(args: AndroidActivityBackPressedEvent
 * use the showDrawer() function to open the app drawer section.
 *************************************************************/
 export function onDrawerButtonTap(args: EventData) {
-    resetBanner();
     vm.showDrawer();
 }
 

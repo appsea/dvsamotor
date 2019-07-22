@@ -14,30 +14,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
 
-import { KeyedTemplate, PercentLength, Template, ContainerView } from "ui/core/view";
-import { ItemsSource, ItemEventData, TemplatedItemsView } from "ui/list-view";
 import { EventData } from "data/observable";
+import { ContainerView, KeyedTemplate, PercentLength, Template } from "ui/core/view";
+import { ItemEventData, ItemsSource, TemplatedItemsView } from "ui/list-view";
 
-export type Orientation = "horizontal" | "vertical"
+export type Orientation = "horizontal" | "vertical";
 
 export class GridView extends ContainerView implements TemplatedItemsView {
-    public static itemLoadingEvent: string;
-    public static itemTapEvent: string;
-    public static loadMoreItemsEvent: string;
-    public static scrollEvent: string;
+    static itemLoadingEvent: string;
+    static itemTapEvent: string;
+    static loadMoreItemsEvent: string;
+    static scrollEvent: string;
 
-    public items: any[] | ItemsSource;
-    public itemTemplate: string | Template;
-    public itemTemplates: string | KeyedTemplate[];
-    public rowHeight: PercentLength;
-    public colWidth: PercentLength;
-    public orientation: Orientation;
+    items: Array<any> | ItemsSource;
+    itemTemplate: string | Template;
+    itemTemplates: string | Array<KeyedTemplate>;
+    rowHeight: PercentLength;
+    colWidth: PercentLength;
+    orientation: Orientation;
 
-    public ios: any; /* UICollectionView */
-    public android: any; /* android.support.v7.widget.RecyclerView */
+    ios: any; /* UICollectionView */
+    android: any; /* android.support.v7.widget.RecyclerView */
 
-    public refresh();
-    public scrollToIndex(index: number, animated?: boolean);
+    refresh();
+    scrollToIndex(index: number, animated?: boolean);
 
     on(eventNames: string, callback: (data: EventData) => void, thisArg?: any);
     on(event: "itemLoading", callback: (args: GridItemEventData) => void, thisArg?: any);

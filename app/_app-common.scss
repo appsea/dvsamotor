@@ -447,3 +447,92 @@ Label {
   color: #3A53FF;
   vertical-align: middle;
 }
+
+.stack {
+  vertical-align: center;
+}
+
+.bar {
+  background-color: #ffffff;
+  width: 16;
+  height: 2;
+  border-radius: 2;
+}
+
+.bar1 {
+  margin-bottom: 3;
+}
+
+.bar2 {
+  margin-bottom: 3;
+}
+
+.bar3 {
+  margin-bottom: 0;
+}
+
+
+@keyframes bar1on {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(0, 5) rotate(45deg); }
+}
+
+@keyframes bar3on {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(0, -5) rotate(-45deg); }
+}
+
+@keyframes bar2on {
+  from { transform: translate(0, 0); opacity: 1; }
+  to { transform: translate(-10, 0); opacity: 0; }
+}
+
+.bar1.menu-bar-on {
+  animation-name: bar1on;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+}
+
+.bar1.menu-bar-off {
+  animation-name: bar1on;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-direction: reverse;
+}
+
+.bar2.menu-bar-on {
+  animation-name: bar2on;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+}
+.bar2.menu-bar-off {
+  animation-name: bar2on;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-direction: reverse;
+}
+
+.bar3.menu-bar-on {
+  animation-name: bar3on;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+}
+
+.bar3.menu-bar-off {
+  animation-name: bar3on;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-direction: reverse;
+}

@@ -105,7 +105,6 @@ export class CategoryPracticeViewModel extends Observable {
 
     showDrawer() {
         QuestionViewModel.showDrawer();
-        AdService.getInstance().hideAd();
     }
 
     enableSelection(): boolean {
