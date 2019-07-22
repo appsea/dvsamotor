@@ -147,12 +147,30 @@ export function next(): void {
 export function showAnswer(): void {
     vm.showAnswer();
     optionList.refresh();
-    moveToLast();
 }
 
 export function selectOption(args): void {
     vm.showAnswer();
     vm.selectOption(args);
     optionList.refresh();
-    moveToLast();
+}
+
+
+export function firstOption(args) {
+    divert(0);
+}
+export function secondOption(args: CreateViewEventData) {
+    divert(1);
+}
+export function thirdOption(args: CreateViewEventData) {
+    divert(2);
+}
+export function fourthOption(args: CreateViewEventData) {
+    divert(3);
+}
+
+export function divert(index: number) {
+    vm.showAnswer();
+    vm.selectIndex(index);
+    optionList.refresh();
 }

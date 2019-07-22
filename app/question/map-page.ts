@@ -1,10 +1,10 @@
-import { GridItemEventData } from "~/nativescript-grid-view";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "tns-core-modules/application";
 import { EventData, Observable } from "tns-core-modules/data/observable";
 import { isAndroid } from "tns-core-modules/platform";
 import { topmost } from "tns-core-modules/ui/frame";
 import { NavigatedData, Page } from "tns-core-modules/ui/page";
+import { GridItemEventData } from "~/nativescript-grid-view";
 import { QuestionViewModel } from "~/question/question-view-model";
 import * as navigationModule from "~/shared/navigation";
 import { IState } from "~/shared/questions.model";
