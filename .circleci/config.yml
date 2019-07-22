@@ -32,6 +32,7 @@ jobs:
       # - run: bash ./.circleci/download.sh
       - run: echo $BASE_64_KEY | base64 -d > $KEYSTORE
       - run: echo $JSON > key.json
+      - run: npm install node-sass --save-dev
       - run: npm run tsc
       - run: echo yes | sudo npm install nativescript -g --unsafe-perm
       #- run: npm install
