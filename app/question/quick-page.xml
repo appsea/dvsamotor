@@ -5,15 +5,18 @@
         xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
-        <NavigationButton visibility="collapsed"></NavigationButton>
-        <GridLayout columns="auto,*,auto" ios:padding="0 10" height="100%"
-                    width="100%">
-            <StackLayout col="0" tap="onDrawerButtonTap" id="stack" class="stack">
-                <Label class="bar bar1" id="bar1" />
-                <Label class="bar bar2" id="bar2" />
-                <Label class="bar bar3" id="bar3" />
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <ActionItem tap="onDrawerButtonTap">
+            <ActionItem.actionView>
+                <StackLayout orientation="horizontal">
+                    <Label class="action-bar-title fa" text="&#xf044;" tap="goToEditPage"></Label>
+                    <Label class="{{ (question.flagged)? 'action-bar-title fa flagged': 'action-bar-title fa' }}"
+                           text="&#xf024;" tap="flag"></Label>
             </StackLayout>
-            <Label col="1" class="action-bar-title" horizontalAlignment="center">
+            </ActionItem.actionView>
+        </ActionItem>
+
+        <Label class="action-bar-title">
                 <label.formattedText>
                     <formattedString>
                         <formattedString.spans>
@@ -25,11 +28,6 @@
                     </formattedString>
                 </label.formattedText>
             </Label>
-            <StackLayout col="2" orientation="horizontal">
-                <Label class="action-bar-title fa" text="&#xf044;" tap="goToEditPage"></Label>
-                <Label class="{{ (question.flagged)? 'action-bar-title fa flagged': 'action-bar-title fa' }}" text="&#xf024;" tap="flag"></Label>
-            </StackLayout>
-        </GridLayout>
     </ActionBar>
 
     <DockLayout stretchLastChild="true">

@@ -4,16 +4,13 @@
         xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
-        <NavigationButton visibility="collapsed"></NavigationButton>
-        <GridLayout columns="auto,*,auto" ios:padding="0 10" height="100%"
-                    width="100%">
-            <StackLayout col="0" tap="onDrawerButtonTap" id="stack" class="stack">
-                <Label class="bar bar1" id="bar1" />
-                <Label class="bar bar2" id="bar2" />
-                <Label class="bar bar3" id="bar3" />
-            </StackLayout>
-            <Label col="1" class="action-bar-title" text="Summary"/>
-        </GridLayout>
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Summary"/>
     </ActionBar>
 
     <ScrollView class="input-field page page-login" horizontalAlignment="center" width="100%" backgroundImage="res://mesh">
