@@ -59,7 +59,7 @@ export function navigate(args: EventData): void {
 }
 
 export function share(args: EventData): void {
-    SocialShare.shareText("http://bit.ly/cartheory\n" +
+    SocialShare.shareText("https://play.google.com/store/apps/details?id=exuberant.dvsa.mttk\n" +
         "Hi there, Take a look at UK Motorcycle Theory Quiz which I am using for cracking the test!!!");
 }
 
