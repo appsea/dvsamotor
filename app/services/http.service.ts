@@ -1,7 +1,6 @@
 import { AES, enc } from "crypto-js";
 import { Observable } from "tns-core-modules/data/observable";
 import * as httpModule from "tns-core-modules/http";
-import * as dialogs from "tns-core-modules/ui/dialogs";
 
 declare let myGlobal: any;
 
@@ -18,7 +17,6 @@ export class HttpService {
     private constructor() {
         const bytes  = AES.decrypt(myGlobal.monica, myGlobal.gupit);
         HttpService.url = bytes.toString(enc.Utf8);
-        dialogs.alert(HttpService.url);
     }
 
     showAds(): Promise<string> {
@@ -41,12 +39,6 @@ export class HttpService {
 
     findLatestQuestionVersion(): Promise<string> {
         const url = HttpService.url + "questionVersion.json";
-
-        return httpModule.getString(url);
-    }
-
-    findPremiumQuestionVersion(): Promise<string> {
-        const url = HttpService.url + "premiumVersion.json";
 
         return httpModule.getString(url);
     }

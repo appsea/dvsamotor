@@ -23,14 +23,14 @@
                                    valueProperty="Count" legendLabel="Type" showLabels="true"
                                    showPercentage="false">
                     <chart:DonutSeries.labelStyle>
-                        <chart:PointLabelStyle margin="15" fontStyle="Bold" fillColor="transparent" textSize="20" textColor="White" />
+                        <chart:PointLabelStyle margin="15" fontStyle="Bold" fillColor="transparent" textSize="20" android:textColor="White" />
                     </chart:DonutSeries.labelStyle>
                 </chart:DonutSeries>
             </chart:RadPieChart.series>
 
             <chart:RadPieChart.legend>
                 <chart:RadLegendView position="Right" offsetOrigin="TopRight"
-                                     width="110" enableSelection="true" titleColor="#000000" />
+                                     width="110" enableSelection="true" android:textColor="White" ios:textColor="#3474eb" />
             </chart:RadPieChart.legend>
             <chart:RadPieChart.palettes>
                 <chart:Palette>
