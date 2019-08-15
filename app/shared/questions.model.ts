@@ -90,3 +90,10 @@ export interface IPracticeStats {
     attempted: Array<number>;
     correct: Array<number>;
 }
+
+export interface IPromoCode {
+    code: string;
+    startDate: string;
+    endDate: string;
+    count: number;
+}

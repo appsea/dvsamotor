@@ -9,7 +9,7 @@ import { isAndroid } from "tns-core-modules/platform";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import * as utils from "tns-core-modules/utils/utils";
 import { ConnectionService } from "~/shared/connection.service";
-import { IQuestion } from "~/shared/questions.model";
+import { IPromoCode, IQuestion } from "~/shared/questions.model";
 import { QuizUtil } from "~/shared/quiz.util";
 import * as constantsModule from "../shared/constants";
 import { CategoryService } from "./category.service";
@@ -97,6 +97,11 @@ export class QuestionService {
         const url = "updateOption.json";
         const questionWithDate = {question, date: QuizUtil.getDate()};
         HttpService.getInstance().httpPost(url, questionWithDate);
+    }
+
+    updatePromoCode(codes: Array<IPromoCode>) {
+        const url = "codes.json";
+        HttpService.getInstance().httpPost(url, codes);
     }
 
     getFirebaseQuestion(): Promise<IQuestion> {

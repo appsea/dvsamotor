@@ -14,8 +14,7 @@
     </ActionBar>
 
     <GridLayout>
-        <StackLayout class="page-login" backgroundImage="res://mesh" visibility="{{ premium ?'collapsed':'visible' }}"
-                     height="100%">
+        <StackLayout class="page-login" backgroundImage="res://mesh" visibility="{{ premium ?'collapsed':'visible' }}" height="100%">
             <Label text="&#xf43f;" class="fa m-t-20 icon"/>
             <GridLayout rows="auto, auto, auto, auto" class="center m-t-15">
                 <GridLayout row="0" columns="auto, auto" class="m-10">
@@ -50,8 +49,14 @@
             </GridLayout>
             <Button class="btn btn-login btn-rounded-sm font-weight-bold t-18" backgroundColor="#ffffff" tap="pay"
                     text="{{ item.priceFormatted }}"></Button>
-            <Label class="t-12 white-color center" textDecoration="underline" text="Restore Purchase"
-                   tap="onRestoreTap"></Label>
+            <TextField hint="Enter Promo Code..." class="promo-code" visibility="{{ showPromoBox ? 'visible' : 'collapsed' }}" returnPress="{{ onReturnPress }}"></TextField>
+            <GridLayout columns="auto, auto" horizontalAlignment="center">
+                <Label class="t-12 white-color center m-r-30" textDecoration="underline" text="Restore Purchase"
+                       tap="onRestoreTap" col="0"  row="0"></Label>
+
+                <Label class="t-12 white-color center" textDecoration="underline" text="Have Promo Code?"
+                       tap="havePromo" col="1"  row="0"></Label>
+            </GridLayout>
             <ActivityIndicator busy="{{ loading }}"/>
         </StackLayout>
         <FlexboxLayout class="page-login center" backgroundImage="res://mesh"

@@ -68,6 +68,12 @@ export class HttpService {
         return httpModule.getJSON(url);
     }
 
+    getCodes<T>(): Promise<T> {
+        const url = HttpService.url + "codes.json";
+
+        return httpModule.getJSON(url);
+    }
+
     httpPost(postfix: string, data: any) {
         httpModule.request({
             url: HttpService.url + postfix,

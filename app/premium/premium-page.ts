@@ -64,3 +64,7 @@ export function onRestoreTap(data: ItemEventData) {
 export function practice(args: EventData) {
     navigationModule.toPage("category/category-page");
 }
+
+export function havePromo(args: EventData) {
+    vm.togglePromoBox();
+}

@@ -2,9 +2,12 @@ import * as purchase from "nativescript-purchase";
 import * as appSettings from "tns-core-modules/application-settings";
 import { EventData, Observable } from "tns-core-modules/data/observable";
 import * as dialogs from "tns-core-modules/ui/dialogs";
+import { TextField } from "tns-core-modules/ui/text-field";
 import { AdService } from "~/admob/ad.service";
+import { HttpService } from "~/services/http.service";
 import { PersistenceService } from "~/services/persistence.service";
 import { QuestionService } from "~/services/question.service";
+import { IPromoCode } from "~/shared/questions.model";
 import * as constantsModule from "../shared/constants";
 
 export class PremiumModel extends Observable {
@@ -17,11 +20,16 @@ export class PremiumModel extends Observable {
         return this._loading;
     }
 
+    get showPromoBox() {
+        return this._showPromoBox;
+    }
+
     get premium() {
         return this._premium;
     }
 
     private _loading: boolean = true;
+    private _showPromoBox: boolean = false;
     private _premium: boolean = false;
     private _item: any;
 
@@ -73,6 +81,37 @@ export class PremiumModel extends Observable {
         QuestionService.getInstance().readAllQuestions();
     }
 
+    togglePromoBox() {
+        this._showPromoBox = !this._showPromoBox;
+        this.publish();
+    }
+
+    onReturnPress(args) {
+        this._loading = true;
+        this.publish();
+        const textField = <TextField>args.object;
+        HttpService.getInstance().getCodes().then((promoCodes: Array<IPromoCode>) => {
+            const codes: Array<IPromoCode> = promoCodes.filter((m: IPromoCode) => m.code.toUpperCase() === textField.text.toUpperCase());
+            if (codes.length > 0) {
+                const code: IPromoCode = codes[0];
+                const startDate: Date = new Date(code.startDate);
+                const endDate: Date = new Date(code.endDate);
+                const currentDate: Date = new Date();
+                if (currentDate >= startDate && currentDate <= endDate) {
+                    this.grantRights();
+                } else {
+                    dialogs.alert("Invalid Code");
+                }
+            } else {
+                dialogs.alert("Invalid Code");
+            }
+            this._loading = false;
+            this.publish();
+        }).catch((e) => {
+            dialogs.alert("Invalid Code");
+        });
+    }
+
     private publish() {
         this.notify({
             object: this, eventName: Observable.propertyChangeEvent,
@@ -80,11 +119,15 @@ export class PremiumModel extends Observable {
         });
         this.notify({
             object: this, eventName: Observable.propertyChangeEvent,
+            propertyName: "premium", value: this.premium
+        });
+        this.notify({
+            object: this, eventName: Observable.propertyChangeEvent,
             propertyName: "loading", value: this._loading
         });
         this.notify({
             object: this, eventName: Observable.propertyChangeEvent,
-            propertyName: "premium", value: this.premium
+            propertyName: "showPromoBox", value: this._showPromoBox
         });
     }
 }
