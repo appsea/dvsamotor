@@ -7,7 +7,6 @@ import { NavigatedData, Page } from "tns-core-modules/ui/page";
 import { CreateViewEventData } from "tns-core-modules/ui/placeholder";
 import { Progress } from "tns-core-modules/ui/progress";
 import { QuestionViewModel } from "~/question/question-view-model";
-import { QuestionService } from "~/services/question.service";
 import { SelectedPageService } from "~/shared/selected-page-service";
 import { SummaryViewModel } from "~/stats/summary-view-model";
 import * as navigationModule from "../shared/navigation";
@@ -40,11 +39,7 @@ export function onNavigatingTo(args: NavigatedData) {
     page.bindingContext = vm;
     SelectedPageService.getInstance().updateSelectedPage("stats");
     setTimeout(() => {
-        {
-            QuestionService.getInstance().readAllQuestions().then(() => {
-                vm.calculate();
-            });
-        }
+        vm.calculate();
     }, 100);
 
 }

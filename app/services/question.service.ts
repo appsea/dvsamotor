@@ -145,7 +145,7 @@ export class QuestionService {
             }
         })).catch((error) => {
             console.error("Error", error);
-            dialogs.alert("Something went wrong fetching the question. Please relaunch the application!");
+            dialogs.alert("Something went wrong fetching the questions. Please relaunch the application!");
         });
     }
 

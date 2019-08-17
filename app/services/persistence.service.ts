@@ -40,6 +40,10 @@ export class PersistenceService {
         appSettings.remove(RESULT);
     }
 
+    removeKey(key: string): void {
+        appSettings.remove(key);
+    }
+
     readPracticeStats(): IPracticeStats {
         return appSettings.hasKey(PRACTICE_STATS) ? JSON.parse(appSettings.getString(PRACTICE_STATS))
             : {attempted: new Array<number>(), correct: new Array<number>()};
