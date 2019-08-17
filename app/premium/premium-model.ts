@@ -86,7 +86,7 @@ export class PremiumModel extends Observable {
         this.publish();
     }
 
-    onReturnPress(args) {
+    submitPromoCode(args) {
         this._loading = true;
         this.publish();
         const textField = <TextField>args.object;

@@ -49,7 +49,7 @@
             </GridLayout>
             <Button class="btn btn-login btn-rounded-sm font-weight-bold t-18" backgroundColor="#ffffff" tap="pay"
                     text="{{ item.priceFormatted }}"></Button>
-            <TextField hint="Enter Promo Code..." class="promo-code" visibility="{{ showPromoBox ? 'visible' : 'collapsed' }}" returnPress="{{ onReturnPress }}"></TextField>
+            <TextField hint="Enter Promo Code..." class="promo-code" visibility="{{ showPromoBox ? 'visible' : 'collapsed' }}" returnPress="{{ submitPromoCode }}"></TextField>
             <GridLayout columns="auto, auto" horizontalAlignment="center">
                 <Label class="t-12 white-color center m-r-30" textDecoration="underline" text="Restore Purchase"
                        tap="onRestoreTap" col="0"  row="0"></Label>
