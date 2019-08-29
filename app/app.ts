@@ -10,6 +10,8 @@ import { isAndroid } from "tns-core-modules/platform";
 import { setTimeout } from "tns-core-modules/timer";
 import * as frame from "tns-core-modules/ui/frame";
 
+require("~/utils/converters");
+
 purchase.init([
     "dvsa.motorcycle.theory.premium"
 ]);

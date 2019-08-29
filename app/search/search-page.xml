@@ -18,7 +18,7 @@
     </ActionBar>
 
     <GridLayout rows="auto, *, auto">
-        <SearchBar row="0" hint="Search Questions..." id="searchBar" text="{{ searchPhrase }}" submit="{{ onSearchSubmit }}" clear="{{ clear }}" class="{{ searching ? 'searching search-bar' : 'not-searching search-bar' }}" visibility="{{ searching ? 'visible': 'collapsed'}}"/>
+        <SearchBar row="0" hint="Search Questions..." id="searchBar" loaded="{{ searchBarLoaded }}" text="{{ searchPhrase }}" submit="{{ onSearchSubmit }}" clear="{{ clear }}" class="{{ searching ? 'searching search-bar' : 'not-searching search-bar' }}" visibility="{{ searching ? 'visible': 'collapsed'}}"/>
         <GridLayout row="1" rows="auto, *">
             <ListView  row="1" id="listView" class="margin" items="{{ questions }}" separatorColor="blue" itemTemplateSelector="$index">
                 <ListView.itemTemplate>
@@ -35,7 +35,7 @@
                                 </FormattedString>
                             </Label.formattedText>
                         </Label>
-                        <Label text="{{ prashna.text }}" textWrap="true"/>
+                        <Label formattedText="{{ prashna.text | highlightSearch($parents['ListView'].searchPhrase, '') }}" textWrap="true"/>
                         <image src="{{ prashna.image }}" class="m-10 question-image" minHeight="40%" visibility="{{ prashna.image ? 'visible' : 'collapsed' }}" stretch="aspectFit"/>
                         <GridLayout columns="*,*" rows="auto,auto" visibility="{{ options[0].image ? 'visible' : 'collapsed' }}">
                             <StackLayout row="0" col="0" class="{{ options[0].correct ? 'correct m-5' :'not-selected-image'}}" >
@@ -51,18 +51,34 @@
                                 <image src="{{ options[3].image }}" class="m-5" />
                             </StackLayout>
                         </GridLayout>
-
-                        <Repeater items="{{ options }}" row="1" visibility="{{ options[0].description ? 'visible' : 'collapsed' }}">
-                            <Repeater.itemTemplate>
-                                <GridLayout columns="*" class="{{ !correct? 'not-selected m-y-5': 'correct m-y-5'}}">
-                                    <Label col="0" text="{{ description }}"
-                                           class="{{ !correct? 'not-selected m-y-10 m-x-2': 'correct m-y-10 m-x-2'}}"
-                                           textWrap="true"/>
-                                </GridLayout>
-                            </Repeater.itemTemplate>
-                        </Repeater>
+                        <StackLayout visibility="{{ options[0].description ? 'visible' : 'collapsed' }}">
+                            <GridLayout columns="*" class="{{ !options[0].correct? 'not-selected m-y-5': 'correct m-y-5'}}">
+                                <StackLayout col="0" class="m-y-10 m-x-2">
+                                    <Label formattedText="{{ options[0].description | highlightSearch($parents['ListView'].searchPhrase,  !options[0].correct? 'not-selected m-y-30 m-x-2': 'correct m-y-30 m-x-2') }}"
+                                           textWrap="true" />
+                                </StackLayout>
+                            </GridLayout>
+                            <GridLayout columns="*" class="{{ !options[1].correct? 'not-selected m-y-5': 'correct m-y-5'}}">
+                                <StackLayout col="0" class="m-y-10 m-x-2">
+                                    <Label formattedText="{{ options[1].description | highlightSearch($parents['ListView'].searchPhrase,  !options[1].correct? 'not-selected m-y-10 m-x-2': 'correct m-y-10 m-x-2') }}"
+                                           textWrap="true" />
+                                </StackLayout>
+                            </GridLayout>
+                            <GridLayout columns="*" class="{{ !options[2].correct? 'not-selected m-y-5': 'correct m-y-5'}}">
+                                <StackLayout col="0" class="m-y-10 m-x-2">
+                                    <Label formattedText="{{ options[2].description | highlightSearch($parents['ListView'].searchPhrase,  !options[2].correct? 'not-selected m-y-10 m-x-2': 'correct m-y-10 m-x-2') }}"
+                                           textWrap="true" />
+                                </StackLayout>
+                            </GridLayout>
+                            <GridLayout columns="*" class="{{ !options[3].correct? 'not-selected m-y-5': 'correct m-y-5'}}">
+                                <StackLayout col="0" class="m-y-10 m-x-2">
+                                    <Label formattedText="{{ options[3].description | highlightSearch($parents['ListView'].searchPhrase,  !options[3].correct? 'not-selected m-y-10 m-x-2': 'correct m-y-10 m-x-2') }}"
+                                           textWrap="true" />
+                                </StackLayout>
+                            </GridLayout>
+                        </StackLayout>
                         <Label text="Explanation: " style="font-weight: bold; margin-top: 10dpi"  textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
-                        <Label text="{{ explanation }}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
+                        <Label formattedText="{{ explanation | highlightSearch($parents['ListView'].searchPhrase, '') }}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>
                 </ListView.itemTemplate>
             </ListView>

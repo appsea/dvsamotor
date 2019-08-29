@@ -1,10 +1,13 @@
 import { EventData, Observable, PropertyChangeData } from "tns-core-modules/data/observable";
+import { isIOS } from "tns-core-modules/platform";
 import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { TextField } from "tns-core-modules/ui/text-field";
 import { QuestionUtil } from "~/services/question.util";
 import { QuizUtil } from "~/shared/quiz.util";
 import { ObservableProperty } from "../observable-property-decorator";
 import { IQuestion, IState } from "../questions.model";
+
+declare const IQKeyboardManager: any;
 
 export class DetailedResultViewModel extends Observable {
 
@@ -55,6 +58,10 @@ export class DetailedResultViewModel extends Observable {
             }
         });
         this.all();
+        if (isIOS) {
+            const keyboard = IQKeyboardManager.sharedManager();
+            keyboard.shouldResignOnTouchOutside = true;
+        }
     }
 
     all(): void {
@@ -66,7 +73,6 @@ export class DetailedResultViewModel extends Observable {
         this._questions = this.allQuestions;
         this._size = this._questions.length;
         this.searchPhrase = "";
-        this._searching = false;
         this.publish();
     }
 
@@ -76,7 +82,6 @@ export class DetailedResultViewModel extends Observable {
         this._questions = this.allQuestions.filter((question) => QuestionUtil.isCorrect(question));
         this._size = this._questions.length;
         this.searchPhrase = "";
-        this._searching = false;
         this.publish();
     }
 
@@ -86,7 +91,6 @@ export class DetailedResultViewModel extends Observable {
         this._message = "were incorrect!";
         this._size = this._questions.length;
         this.searchPhrase = "";
-        this._searching = false;
         this.publish();
     }
 
@@ -96,7 +100,6 @@ export class DetailedResultViewModel extends Observable {
         this._questions = this.allQuestions.filter((question) => QuestionUtil.isSkipped(question));
         this._size = this._questions.length;
         this.searchPhrase = "";
-        this._searching = false;
         this.publish();
     }
 
@@ -104,6 +107,7 @@ export class DetailedResultViewModel extends Observable {
         this.refilter();
         const searchBar = <SearchBar>args.object;
         searchBar.dismissSoftInput();
+        QuizUtil.hideKeyboard();
     }
 
     clear(): void {

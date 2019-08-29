@@ -2,6 +2,7 @@ import { EventData, Observable, PropertyChangeData  } from "tns-core-modules/dat
 import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { TextField } from "tns-core-modules/ui/text-field";
 import { QuestionService } from "~/services/question.service";
+import { QuizUtil } from "~/shared/quiz.util";
 import { ObservableProperty } from "../shared/observable-property-decorator";
 import { IQuestion } from "../shared/questions.model";
 
@@ -12,6 +13,7 @@ export class SearchPageModel extends Observable {
     private readonly ALL: string = "All";
     private _searching: boolean = true;
     private _textField: TextField;
+    private searchBar: SearchBar;
 
     get size() {
         return this._size;
@@ -39,6 +41,11 @@ export class SearchPageModel extends Observable {
         this.refilter();
         const searchBar = <SearchBar>args.object;
         searchBar.dismissSoftInput();
+        QuizUtil.hideKeyboard();
+    }
+
+    searchBarLoaded(args): void {
+        this.searchBar = <SearchBar>args.object;
     }
 
     textFieldLoaded(args): void {
@@ -65,6 +72,9 @@ export class SearchPageModel extends Observable {
 
     toggleSearch(): void {
         this._searching = !this._searching;
+        if (this._searching) {
+            QuizUtil.showKeyboard(this.searchBar);
+        }
         this.publish();
     }
 
