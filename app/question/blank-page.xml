@@ -4,7 +4,7 @@
         xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
-        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <NavigationButton ios:visibility="collapsed" icon="res://menu"></NavigationButton>
         <Label class="action-bar-title" text="Motorcycle Theory"/>
     </ActionBar>
 

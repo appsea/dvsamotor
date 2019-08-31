@@ -72,8 +72,7 @@
                             </GridLayout>
                             <GridLayout columns="*" class="{{ !options[3].correct? 'not-selected m-y-5': 'correct m-y-5'}}">
                                 <StackLayout col="0" class="m-y-10 m-x-2">
-                                    <Label formattedText="{{ options[3].description | highlightSearch($parents['ListView'].searchPhrase,  !options[3].correct? 'not-selected m-y-10 m-x-2': 'correct m-y-10 m-x-2') }}"
-                                           textWrap="true" />
+                                    <Label formattedText="{{ options[3].description | highlightSearch($parents['ListView'].searchPhrase,  !options[3].correct? 'not-selected m-y-10 m-x-2': 'correct m-y-10 m-x-2') }}" textWrap="true" />
                                 </StackLayout>
                             </GridLayout>
                         </StackLayout>
