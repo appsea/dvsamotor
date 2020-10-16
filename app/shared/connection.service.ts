@@ -1,4 +1,4 @@
-import * as connectivity from "tns-core-modules/connectivity";
+import * as connectivity from "@nativescript/core/connectivity";
 
 /**
  * Created by rakesh on 15-Nov-2017.

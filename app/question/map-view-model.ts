@@ -1,6 +1,5 @@
+import { Observable } from "@nativescript/core/data/observable";
 import * as Toast from "nativescript-toast";
-import { EventData, Observable } from "tns-core-modules/data/observable";
-import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
 import { GridItemEventData } from "~/nativescript-grid-view";
 import { QuestionUtil } from "~/services/question.util";
 import { SettingsService } from "~/services/settings.service";

@@ -1,7 +1,7 @@
-var utils = require("tns-core-modules/utils/utils");
-var application = require("tns-core-modules/application");
+var utils = require("@nativescript/core/utils/utils");
+var application = require("@nativescript/core/application");
 var admob = require("./admob-common");
-var frame = require("tns-core-modules/ui/frame");
+var frame = require("@nativescript/core/ui/frame");
 
 // need to cache this baby since after an Interstitial was shown a second won't resolve the activity
 admob.activity = application.android.foregroundActivity;

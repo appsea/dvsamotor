@@ -1,4 +1,4 @@
-import { isIOS, screen } from "tns-core-modules/platform";
+import { isIOS, Screen } from "@nativescript/core/platform";
 import { CoolAds } from "~/admob/coolAds";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { HttpService } from "~/services/http.service";
@@ -60,7 +60,7 @@ export class AdService {
     getAdHeight(): number {
         let height = 0;
         if (this._showAd) {
-            const screenHeight: number = screen.mainScreen.heightDIPs;
+            const screenHeight: number = Screen.mainScreen.heightDIPs;
             if (screenHeight > 400 && screenHeight < 721) {
                 height = 50;
             } else if (screenHeight > 720) {

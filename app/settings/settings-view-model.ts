@@ -1,4 +1,4 @@
-import { EventData, Observable } from "tns-core-modules/data/observable";
+import { EventData, Observable } from "@nativescript/core/data/observable";
 import { SettingsService } from "~/services/settings.service";
 import { ISetting } from "~/shared/questions.model";
 

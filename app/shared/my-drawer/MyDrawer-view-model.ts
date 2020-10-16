@@ -1,5 +1,5 @@
-import * as appVersion from "nativescript-appversion";
-import { EventData, Observable } from "tns-core-modules/data/observable";
+import * as appVersion from "@nativescript/appversion";
+import { EventData, Observable } from "@nativescript/core/data/observable";
 
 import { ObservableProperty } from "~/shared/observable-property-decorator";
 import { SelectedPageService } from "~/shared/selected-page-service";

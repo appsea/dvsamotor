@@ -1,8 +1,8 @@
 /**
  * Created by rakesh on 15-Nov-2017.
  */
-import * as appSettings from "tns-core-modules/application-settings";
-import { Observable } from "tns-core-modules/data/observable";
+import * as appSettings from "@nativescript/core/application-settings";
+import { Observable } from "@nativescript/core/data/observable";
 import { PRACTICE_STATS, PREMIUM, RESULT } from "~/shared/constants";
 import { ICategory, IPracticeStats, IQuestion, IResult, ITopic } from "~/shared/questions.model";
 import * as constantsModule from "../shared/constants";

@@ -1,5 +1,5 @@
+import { EventData, Observable } from "@nativescript/core/data/observable";
 import * as Toast from "nativescript-toast";
-import { EventData, Observable } from "tns-core-modules/data/observable";
 import { QuestionService } from "~/services/question.service";
 import { QuestionUtil } from "~/services/question.util";
 import { IOption, IQuestion, IState } from "~/shared/questions.model";

@@ -1,4 +1,4 @@
-import { EventData, Observable } from "tns-core-modules/data/observable";
+import { EventData, Observable } from "@nativescript/core/data/observable";
 import { PersistenceService } from "~/services/persistence.service";
 import { QuestionUtil } from "~/services/question.util";
 import * as constantsModule from "../constants";

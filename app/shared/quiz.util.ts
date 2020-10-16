@@ -1,7 +1,7 @@
-import { File, Folder, knownFolders } from "tns-core-modules/file-system";
-import { isAndroid, isIOS } from "tns-core-modules/platform";
-import * as frame from "tns-core-modules/ui/frame";
-import * as utils from "tns-core-modules/utils/utils";
+import { File, Folder, knownFolders } from "@nativescript/core/file-system";
+import { isAndroid, isIOS } from "@nativescript/core/platform";
+import * as frame from "@nativescript/core/ui/frame";
+import * as utils from "@nativescript/core/utils/utils";
 import { IQuestion } from "~/shared/questions.model";
 
 export class QuizUtil {

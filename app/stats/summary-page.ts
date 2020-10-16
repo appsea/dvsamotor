@@ -1,11 +1,11 @@
+import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
+import { EventData, Observable } from "@nativescript/core/data/observable";
+import { isAndroid, isIOS } from "@nativescript/core/platform";
+import { topmost } from "@nativescript/core/ui/frame";
+import { NavigatedData, Page } from "@nativescript/core/ui/page";
+import { CreateViewEventData } from "@nativescript/core/ui/placeholder";
+import { Progress } from "@nativescript/core/ui/progress";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import { AndroidActivityBackPressedEventData, AndroidApplication } from "tns-core-modules/application";
-import { EventData, Observable } from "tns-core-modules/data/observable";
-import { isAndroid, isIOS } from "tns-core-modules/platform";
-import { topmost } from "tns-core-modules/ui/frame";
-import { NavigatedData, Page } from "tns-core-modules/ui/page";
-import { CreateViewEventData } from "tns-core-modules/ui/placeholder";
-import { Progress } from "tns-core-modules/ui/progress";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { SelectedPageService } from "~/shared/selected-page-service";
 import { SummaryViewModel } from "~/stats/summary-view-model";

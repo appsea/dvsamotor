@@ -1,5 +1,5 @@
-import { EventData, Observable } from "tns-core-modules/data/observable";
-import { clearInterval, setInterval, setTimeout } from "tns-core-modules/timer";
+import { EventData, Observable } from "@nativescript/core/data/observable";
+import { clearInterval, setInterval, setTimeout } from "@nativescript/core/timer";
 import { SettingsService } from "~/services/settings.service";
 import { IState } from "~/shared/questions.model";
 import { QuestionViewModel } from "./question-view-model";

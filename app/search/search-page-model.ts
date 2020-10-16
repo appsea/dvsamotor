@@ -1,6 +1,6 @@
-import { EventData, Observable, PropertyChangeData  } from "tns-core-modules/data/observable";
-import { SearchBar } from "tns-core-modules/ui/search-bar";
-import { TextField } from "tns-core-modules/ui/text-field";
+import { EventData, Observable, PropertyChangeData  } from "@nativescript/core/data/observable";
+import { SearchBar } from "@nativescript/core/ui/search-bar";
+import { TextField } from "@nativescript/core/ui/text-field";
 import { QuestionService } from "~/services/question.service";
 import { QuizUtil } from "~/shared/quiz.util";
 import { ObservableProperty } from "../shared/observable-property-decorator";

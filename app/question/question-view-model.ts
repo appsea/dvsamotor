@@ -1,8 +1,8 @@
+import * as app from "@nativescript/core/application";
+import { EventData, Observable } from "@nativescript/core/data/observable";
+import * as dialogs from "@nativescript/core/ui/dialogs";
+import { topmost } from "@nativescript/core/ui/frame";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
-import { EventData, Observable } from "tns-core-modules/data/observable";
-import * as dialogs from "tns-core-modules/ui/dialogs";
-import { topmost } from "tns-core-modules/ui/frame";
 import { AdService } from "~/admob/ad.service";
 import { QuestionService } from "~/services/question.service";
 import { QuestionUtil } from "~/services/question.util";

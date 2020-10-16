@@ -1,4 +1,4 @@
-import { EventData } from "tns-core-modules/data/observable";
+import { EventData } from "@nativescript/core/data/observable";
 import { AdService } from "~/admob/ad.service";
 import { QuestionService } from "~/services/question.service";
 import * as navigationModule from "../shared/navigation";

@@ -1,4 +1,4 @@
-import * as appSettings from "tns-core-modules/application-settings";
+import * as appSettings from "@nativescript/core/application-settings";
 import { IQuestion, ISetting, IState } from "~/shared/questions.model";
 import * as constantsModule from "../shared/constants";
 import * as navigationModule from "../shared/navigation";

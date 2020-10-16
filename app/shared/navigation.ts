@@ -1,4 +1,4 @@
-import * as frameModule from "tns-core-modules/ui/frame";
+import * as frameModule from "@nativescript/core/ui/frame";
 import { SettingsService } from "~/services/settings.service";
 import { IState, ISubTopic } from "./questions.model";
 

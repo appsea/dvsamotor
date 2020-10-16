@@ -1,7 +1,7 @@
 var admob = require("./admob-common");
-var application = require("tns-core-modules/application");
-var device = require("tns-core-modules/platform").device;
-var DeviceType = require("tns-core-modules/ui/enums").DeviceType;
+var application = require("@nativescript/core/application");
+var device = require("@nativescript/core/platform").device;
+var DeviceType = require("@nativescript/core/ui/enums").DeviceType;
 
 var GADBannerViewDelegateImpl = (function (_super) {
     __extends(GADBannerViewDelegateImpl, _super);

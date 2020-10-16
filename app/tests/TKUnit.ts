@@ -1,4 +1,5 @@
 ﻿/* tslint:disable */
+
 /* Notes:
 
  1. all test function names should begin with 'test'
@@ -9,18 +10,14 @@
  6. (if exists) at the end of module test tearDownModule() module function is called
 
 */
-import * as appSettings from "tns-core-modules/application-settings";
-import * as Application from "tns-core-modules/application";
-import * as timer from "tns-core-modules/timer";
-import * as trace from "tns-core-modules/trace";
-import * as types from "tns-core-modules/utils/types";
-import * as platform from "tns-core-modules/platform";
-import {topmost} from "tns-core-modules/ui/frame";
+import * as appSettings from "@nativescript/core/application-settings";
 import * as constantsModule from "../shared/constants";
+import { Trace, Device } from '@nativescript/core';
+import * as types from '@nativescript/core/utils/types';
 
-const sdkVersion = parseInt(platform.device.sdkVersion);
+const sdkVersion = parseInt(Device.sdkVersion);
 
-trace.enable();
+Trace.enable();
 
 export interface TestInfoEntry {
     testFunc: () => void;
@@ -40,8 +37,7 @@ export function time(): number {
 }
 
 export function write(message: string, type?: number) {
-    //console.log(message);
-    trace.write(message, trace.categories.Test, type);
+    Trace.write(message, Trace.categories.Test, type);
 }
 
 function runTest(testInfo: TestInfoEntry) {
@@ -50,23 +46,21 @@ function runTest(testInfo: TestInfoEntry) {
     try {
         if (testInfo.instance) {
             testInfo.testFunc.apply(testInfo.instance);
-        }
-        else {
+        } else {
             testInfo.testFunc();
         }
 
         if (testInfo.isTest) {
             duration = time() - start;
             testInfo.duration = duration;
-            write(`--- [${testInfo.testName}] OK, duration: ${duration.toFixed(2)}`, trace.messageType.info);
+            write(`--- [${testInfo.testName}] OK, duration: ${duration.toFixed(2)}`, Trace.messageType.info);
             testInfo.isPassed = true;
         }
-    }
-    catch (e) {
+    } catch (e) {
         if (testInfo.isTest) {
             duration = time() - start;
             testInfo.duration = duration;
-            write(`--- [${testInfo.testName}] FAILED: ${e.message}, Stack: ${e.stack}, duration: ${duration.toFixed(2)}`, trace.messageType.error);
+            write(`--- [${testInfo.testName}] FAILED: ${e.message}, Stack: ${e.stack}, duration: ${duration.toFixed(2)}`, Trace.messageType.error);
             testInfo.isPassed = false;
             testInfo.errorMessage = e.message;
         }
@@ -94,14 +88,14 @@ function runAsync(testInfo: TestInfoEntry, recursiveIndex: number, testTimeout?:
     let isDone = false;
     let handle;
     const testStartTime = time();
-    //write("--- [" + testInfo.testName + "] Started at: " + testStartTime, trace.messageType.info);
+    //write("--- [" + testInfo.testName + "] Started at: " + testStartTime, Trace.messageType.info);
     const doneCallback = (e: Error) => {
         if (e) {
             error = e;
         } else {
             isDone = true;
         }
-    }
+    };
 
     const timeout = testTimeout || testInfo.testTimeout || defaultTimeout;
 
@@ -110,24 +104,24 @@ function runAsync(testInfo: TestInfoEntry, recursiveIndex: number, testTimeout?:
         duration = time() - testStartTime;
         testInfo.duration = duration;
         if (isDone) {
-            write(`--- [${testInfo.testName}] OK, duration: ${duration.toFixed(2)}`, trace.messageType.info);
+            write(`--- [${testInfo.testName}] OK, duration: ${duration.toFixed(2)}`, Trace.messageType.info);
             testInfo.isPassed = true;
             runTests(testsQueue, recursiveIndex + 1);
         } else if (error) {
-            write(`--- [${testInfo.testName}] FAILED: ${error.message}, duration: ${duration.toFixed(2)}`, trace.messageType.error);
-           testInfo.errorMessage = error.message;
+            write(`--- [${testInfo.testName}] FAILED: ${error.message}, duration: ${duration.toFixed(2)}`, Trace.messageType.error);
+            testInfo.errorMessage = error.message;
             runTests(testsQueue, recursiveIndex + 1);
         } else {
             const testEndTime = time();
             if (testEndTime - testStartTime > timeout) {
-                write(`--- [${testInfo.testName}] TIMEOUT, duration: ${duration.toFixed(2)}`, trace.messageType.error);
-                testInfo.errorMessage = "Test timeout.";
+                write(`--- [${testInfo.testName}] TIMEOUT, duration: ${duration.toFixed(2)}`, Trace.messageType.error);
+                testInfo.errorMessage = 'Test timeout.';
                 runTests(testsQueue, recursiveIndex + 1);
             } else {
                 setTimeout(checkFinished, 20);
             }
         }
-    }
+    };
 
     try {
         if (testInfo.instance) {
@@ -191,23 +185,18 @@ export function assertNotEqual(actual: any, expected: any, message?: string) {
     }
 
     if (equals) {
-        throw new Error(message + " Actual: " + actual + " Not_Expected: " + expected);
+        throw new Error(message + ' Actual: ' + actual + ' Not_Expected: ' + expected);
     }
 }
 
 export function assertEqual<T extends { equals?(arg: T): boolean } | any>(actual: T, expected: T, message: string = '') {
-    if (!types.isNullOrUndefined(actual)
-        && !types.isNullOrUndefined(expected)
-        && types.getClass(actual) === types.getClass(expected)
-        && types.isFunction(actual.equals)) {
-
+    if (!types.isNullOrUndefined(actual) && !types.isNullOrUndefined(expected) && types.getClass(actual) === types.getClass(expected) && types.isFunction((<any>actual).equals)) {
         // Use the equals method
-        if (!actual.equals(expected)) {
-            //throw new Error(`${message} Actual: <${actual}>(${typeof (actual)}). Expected: <${expected}>(${typeof (expected)})`);
+        if (!(<any>actual).equals(expected)) {
+            throw new Error(`${message} Actual: <${actual}>(${typeof actual}). Expected: <${expected}>(${typeof expected})`);
         }
-    }
-    else if (actual !== expected) {
-        // throw new Error(`${message} Actual: <${actual}>(${typeof (actual)}). Expected: <${expected}>(${typeof (expected)})` );
+    } else if (actual !== expected) {
+        throw new Error(`${message} Actual: <${actual}>(${typeof actual}). Expected: <${expected}>(${typeof expected})`);
     }
 }
 
@@ -218,55 +207,55 @@ export function assertDeepEqual(actual, expected, message: string = '', path: an
     let typeofActual: string = typeof actual;
     let typeofExpected: string = typeof expected;
     if (typeofActual !== typeofExpected) {
-        throw new Error(message + ' ' + "At /" + path.join("/") + " types of actual " + typeofActual + " and expected " + typeofExpected + " differ.");
-    } else if (typeofActual === "object" || typeofActual === "array") {
+        throw new Error(message + ' ' + 'At /' + path.join('/') + ' types of actual ' + typeofActual + ' and expected ' + typeofExpected + ' differ.');
+    } else if (typeofActual === 'object' || typeofActual === 'array') {
         if (expected instanceof Map) {
             if (actual instanceof Map) {
                 expected.forEach((value, key) => {
                     if (actual.has(key)) {
                         assertDeepEqual(actual.get(key), value, message, path.concat([key]));
                     } else {
-                        throw new Error(message + ' ' + "At /" + path.join("/") + " expected Map has key '" + key + "' but actual does not.");
+                        throw new Error(message + ' ' + 'At /' + path.join('/') + " expected Map has key '" + key + "' but actual does not.");
                     }
                 });
                 actual.forEach((value, key) => {
                     if (!expected.has(key)) {
-                        throw new Error(message + ' ' + "At /" + path.join("/") + " actual Map has key '" + key + "' but expected does not.");
+                        throw new Error(message + ' ' + 'At /' + path.join('/') + " actual Map has key '" + key + "' but expected does not.");
                     }
                 });
             } else {
-                throw new Error(message + ' ' + "At /" + path.join("/") + " expected is Map but actual is not.");
+                throw new Error(message + ' ' + 'At /' + path.join('/') + ' expected is Map but actual is not.');
             }
         }
         if (expected instanceof Set) {
             if (actual instanceof Set) {
-                expected.forEach(i => {
+                expected.forEach((i) => {
                     if (!actual.has(i)) {
-                        throw new Error(message + ' ' + "At /" + path.join("/") + " expected Set has item '" + i + "' but actual does not.");
+                        throw new Error(message + ' ' + 'At /' + path.join('/') + " expected Set has item '" + i + "' but actual does not.");
                     }
                 });
-                actual.forEach(i => {
+                actual.forEach((i) => {
                     if (!expected.has(i)) {
-                        throw new Error(message + ' ' + "At /" + path.join("/") + " actual Set has item '" + i + "' but expected does not.");
+                        throw new Error(message + ' ' + 'At /' + path.join('/') + " actual Set has item '" + i + "' but expected does not.");
                     }
-                })
+                });
             } else {
-                throw new Error(message + ' ' + "At /" + path.join("/") + " expected is Set but actual is not.");
+                throw new Error(message + ' ' + 'At /' + path.join('/') + ' expected is Set but actual is not.');
             }
         }
         for (let key in actual) {
             if (!(key in expected)) {
-                throw new Error(message + ' ' + "At /" + path.join("/") + " found unexpected key " + key + ".");
+                throw new Error(message + ' ' + 'At /' + path.join('/') + ' found unexpected key ' + key + '.');
             }
             assertDeepEqual(actual[key], expected[key], message, path.concat([key]));
         }
         for (let key in expected) {
             if (!(key in actual)) {
-                throw new Error(message + ' ' + "At /" + path.join("/") + " expected a key " + key + ".");
+                throw new Error(message + ' ' + 'At /' + path.join('/') + ' expected a key ' + key + '.');
             }
         }
     } else if (actual !== expected) {
-        throw new Error(message + ' ' + "At /" + path.join("/") + " actual: '" + actual + "' and expected: '" + expected + "' differ.");
+        throw new Error(message + ' ' + 'At /' + path.join('/') + " actual: '" + actual + "' and expected: '" + expected + "' differ.");
     }
 }
 
@@ -274,28 +263,28 @@ export function assertDeepSuperset(actual, expected, path: any[] = []): void {
     let typeofActual: string = typeof actual;
     let typeofExpected: string = typeof expected;
     if (typeofActual !== typeofExpected) {
-        throw new Error("At /" + path.join("/") + " types of actual " + typeofActual + " and expected " + typeofExpected + " differ.");
-    } else if (typeofActual === "object" || typeofActual === "array") {
+        throw new Error('At /' + path.join('/') + ' types of actual ' + typeofActual + ' and expected ' + typeofExpected + ' differ.');
+    } else if (typeofActual === 'object' || typeofActual === 'array') {
         for (let key in expected) {
             if (!(key in actual)) {
-                throw new Error("At /" + path.join("/") + " expected a key " + key + ".");
+                throw new Error('At /' + path.join('/') + ' expected a key ' + key + '.');
             }
             assertDeepSuperset(actual[key], expected[key], path.concat([key]));
         }
     } else if (actual !== expected) {
-        throw new Error("At /" + path.join("/") + " actual: '" + actual + "' and expected: '" + expected + "' differ.");
+        throw new Error('At /' + path.join('/') + " actual: '" + actual + "' and expected: '" + expected + "' differ.");
     }
 }
 
 export function assertNull(actual: any, message?: string) {
     if (actual !== null && actual !== undefined) {
-        throw new Error(message + " Actual: " + actual + " is not null/undefined");
+        throw new Error(message + ' Actual: ' + actual + ' is not null/undefined');
     }
 }
 
 export function assertNotNull(actual: any, message?: string) {
     if (actual === null || actual === undefined) {
-        throw new Error(message + " Actual: " + actual + " is null/undefined");
+        throw new Error(message + ' Actual: ' + actual + ' is null/undefined');
     }
 }
 
@@ -309,23 +298,34 @@ export function areClose(actual: number, expected: number, delta: number): boole
 
 export function assertAreClose(actual: number, expected: number, delta: number, message?: string) {
     if (!areClose(actual, expected, delta)) {
-        throw new Error(message + " Numbers are not close enough. Actual: " + actual + " Expected: " + expected + " Delta: " + delta);
+        throw new Error(message + ' Numbers are not close enough. Actual: ' + actual + ' Expected: ' + expected + ' Delta: ' + delta);
+    }
+}
+
+export function assertMatches(actual: string, expected: RegExp, message?: string) {
+    if (expected.test(actual) !== true) {
+        throw new Error(`"${actual}" doesn't match "${expected}". ${message}`);
     }
 }
 
 export function arrayAssert(actual: Array<any>, expected: Array<any>, message?: string) {
     if (actual.length !== expected.length) {
-        throw new Error(message + " Actual array length: " + actual.length + " Expected array length: " + expected.length);
+        throw new Error(message + ' Actual array length: ' + actual.length + ' Expected array length: ' + expected.length);
     }
 
     for (let i = 0; i < actual.length; i++) {
         if (actual[i] !== expected[i]) {
-            throw new Error(message + " Actual element at " + i + " is: " + actual[i] + " Expected element is: " + expected[i]);
+            throw new Error(message + ' Actual element at ' + i + ' is: ' + actual[i] + ' Expected element is: ' + expected[i]);
         }
     }
 }
 
 export function assertThrows(testFunc: () => void, assertMessage?: string, expectedMessage?: string) {
+    const re = expectedMessage ? new RegExp(`^${expectedMessage}$`) : null;
+    return assertThrowsRegExp(testFunc, assertMessage, re);
+}
+
+export function assertThrowsRegExp(testFunc: () => void, assertMessage?: string, expectedMessage?: RegExp) {
     let actualError: Error;
     try {
         testFunc();
@@ -334,11 +334,11 @@ export function assertThrows(testFunc: () => void, assertMessage?: string, expec
     }
 
     if (!actualError) {
-        throw new Error("Missing expected exception. " + assertMessage);
+        throw new Error('Missing expected exception. ' + assertMessage);
     }
 
-    if (expectedMessage && actualError.message !== expectedMessage) {
-        throw new Error("Got unwanted exception. Actual error: " + actualError.message + " Expected error: " + expectedMessage);
+    if (expectedMessage && !expectedMessage.test(actualError.message)) {
+        throw new Error('Got unwanted exception. Actual error: ' + actualError.message + ' Expected to match: ' + expectedMessage);
     }
 }
 
@@ -349,10 +349,6 @@ export function wait(seconds: number): void {
 export function waitUntilReady(isReady: () => boolean, timeoutSec: number = 3, shouldThrow: boolean = true) {
     if (!isReady) {
         return;
-    }
-
-    if (Application.android) {
-        doModalAndroid(isReady, timeoutSec, shouldThrow);
     }
 }
 
@@ -367,11 +363,11 @@ function prepareModal() {
         return;
     }
 
-    const clsMsgQueue = java.lang.Class.forName("android.os.MessageQueue");
-    const clsMsg = java.lang.Class.forName("android.os.Message");
+    const clsMsgQueue = java.lang.Class.forName('android.os.MessageQueue');
+    const clsMsg = java.lang.Class.forName('android.os.Message');
     const methods = clsMsgQueue.getDeclaredMethods();
     for (let i = 0; i < methods.length; i++) {
-        if (methods[i].getName() === "next") {
+        if (methods[i].getName() === 'next') {
             nextMethod = methods[i];
             nextMethod.setAccessible(true);
             break;
@@ -380,7 +376,7 @@ function prepareModal() {
 
     const fields = clsMsg.getDeclaredFields();
     for (let i = 0; i < fields.length; i++) {
-        if (fields[i].getName() === "target") {
+        if (fields[i].getName() === 'target') {
             targetField = fields[i];
             targetField.setAccessible(true);
             break;
@@ -421,7 +417,7 @@ function doModalAndroid(quitLoop: () => boolean, timeoutSec: number, shouldThrow
 
     let quit = false;
     let timeout = false;
-    timer.setTimeout(() => {
+    setTimeout(() => {
         quit = true;
         timeout = true;
     }, timeoutSec * 1000);
@@ -438,13 +434,14 @@ function doModalAndroid(quitLoop: () => boolean, timeoutSec: number, shouldThrow
                 target.dispatchMessage(msg);
             }
 
-            if (sdkVersion < 21) {//https://code.google.com/p/android-test-kit/issues/detail?id=84
+            if (sdkVersion < 21) {
+                //https://code.google.com/p/android-test-kit/issues/detail?id=84
                 msg.recycle();
             }
         }
 
         if (shouldThrow && timeout) {
-            throw new Error("waitUntilReady Timeout.");
+            throw new Error('waitUntilReady Timeout.');
         }
 
         if (!quit && quitLoop()) {
