@@ -1,6 +1,6 @@
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData} from "@nativescript/core/data/observable";
-import { isAndroid} from "@nativescript/core/platform";
+import { EventData } from "@nativescript/core/data/observable";
+import { isAndroid } from "@nativescript/core/platform";
 import * as ButtonModule from "@nativescript/core/ui/button";
 import * as dialogs from "@nativescript/core/ui/dialogs";
 import { SwipeDirection } from "@nativescript/core/ui/gestures";

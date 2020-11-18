@@ -1,5 +1,5 @@
 import * as appSettings from "@nativescript/core/application-settings";
-import { EventData} from "@nativescript/core/data/observable";
+import { EventData } from "@nativescript/core/data/observable";
 import * as dialogs from "@nativescript/core/ui/dialogs";
 import { ItemEventData } from "@nativescript/core/ui/list-view";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";

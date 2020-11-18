@@ -1,4 +1,4 @@
-import { EventData} from "@nativescript/core/data/observable";
+import { EventData } from "@nativescript/core/data/observable";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
 import * as Toast from "nativescript-toast";
 import { AdService } from "~/admob/ad.service";

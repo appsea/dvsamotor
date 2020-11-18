@@ -1,5 +1,5 @@
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData} from "@nativescript/core/data/observable";
+import { EventData } from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
 import { GridItemEventData } from "~/nativescript-grid-view";

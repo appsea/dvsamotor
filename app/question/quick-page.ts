@@ -2,7 +2,7 @@ import { AndroidActivityBackPressedEventData, AndroidApplication } from "@native
 import { EventData } from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
 import * as dialogs from "@nativescript/core/ui/dialogs";
-import { SwipeDirection} from "@nativescript/core/ui/gestures";
+import { SwipeDirection } from "@nativescript/core/ui/gestures";
 import * as ListView from "@nativescript/core/ui/list-view";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
 import { CreateViewEventData } from "@nativescript/core/ui/placeholder";

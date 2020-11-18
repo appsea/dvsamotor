@@ -1,5 +1,5 @@
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData} from "@nativescript/core/data/observable";
+import { EventData } from "@nativescript/core/data/observable";
 import * as dialogs from "@nativescript/core/ui/dialogs";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
 import * as Toast from "nativescript-toast";

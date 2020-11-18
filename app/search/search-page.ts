@@ -1,5 +1,5 @@
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData} from "@nativescript/core/data/observable";
+import { EventData } from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
 import * as ListView from "@nativescript/core/ui/list-view";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
