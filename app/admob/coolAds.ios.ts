@@ -1,5 +1,4 @@
 import {
-    AD_SIZE,
     adLoaded,
     createBanner,
     createInterstitial,

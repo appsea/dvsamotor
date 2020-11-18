@@ -1,11 +1,6 @@
-import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData, Observable } from "@nativescript/core/data/observable";
-import { isAndroid } from "@nativescript/core/platform";
-import { topmost } from "@nativescript/core/ui/frame";
+import { EventData} from "@nativescript/core/data/observable";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
-import { CreateViewEventData } from "@nativescript/core/ui/placeholder";
 import * as Toast from "nativescript-toast";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AdService } from "~/admob/ad.service";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { SelectedPageService } from "~/shared/selected-page-service";

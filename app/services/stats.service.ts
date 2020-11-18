@@ -2,8 +2,6 @@
  * Created by rakesh on 15-Nov-2017.
  */
 import * as appSettings from "@nativescript/core/application-settings";
-import { Observable } from "@nativescript/core/data/observable";
-import { isAndroid } from "@nativescript/core/platform";
 import { CategoryService } from "~/services/category.service";
 import { PersistenceService } from "~/services/persistence.service";
 import { QuestionUtil } from "~/services/question.util";

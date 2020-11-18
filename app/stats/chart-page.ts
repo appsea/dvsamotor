@@ -1,7 +1,5 @@
 import { EventData } from "@nativescript/core/data/observable";
-import { topmost } from "@nativescript/core/ui/frame";
 import * as orientationModule from "nativescript-screen-orientation";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { ChartViewModel } from "./chart-view-model";
 

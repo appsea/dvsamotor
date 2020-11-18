@@ -1,10 +1,8 @@
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData, Observable } from "@nativescript/core/data/observable";
+import { EventData} from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
-import { topmost } from "@nativescript/core/ui/frame";
 import * as ListView from "@nativescript/core/ui/list-view";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { SearchPageModel } from "~/search/search-page-model";
 import { QuizUtil } from "~/shared/quiz.util";

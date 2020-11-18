@@ -1,4 +1,4 @@
-import { EventData, Observable, PropertyChangeData } from "@nativescript/core/data/observable";
+import { Observable, PropertyChangeData } from "@nativescript/core/data/observable";
 import { isIOS } from "@nativescript/core/platform";
 import { SearchBar } from "@nativescript/core/ui/search-bar";
 import { TextField } from "@nativescript/core/ui/text-field";

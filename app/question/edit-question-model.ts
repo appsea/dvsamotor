@@ -1,4 +1,4 @@
-import { EventData, Observable } from "@nativescript/core/data/observable";
+import { Observable } from "@nativescript/core/data/observable";
 import * as Toast from "nativescript-toast";
 import { QuestionService } from "~/services/question.service";
 import { QuestionUtil } from "~/services/question.util";

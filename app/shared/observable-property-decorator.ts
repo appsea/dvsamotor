@@ -1,4 +1,4 @@
-import { EventData, Observable } from "@nativescript/core/data/observable";
+import { Observable } from "@nativescript/core/data/observable";
 
 export function ObservableProperty() {
     return (target: Observable, propertyKey: string) => {

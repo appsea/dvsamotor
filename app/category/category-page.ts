@@ -1,16 +1,8 @@
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
 import { EventData } from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
-import { AnimationCurve } from "@nativescript/core/ui/enums";
-import { topmost } from "@nativescript/core/ui/frame";
-import { Label } from "@nativescript/core/ui/label";
 import { ListView } from "@nativescript/core/ui/list-view";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
-import { CreateViewEventData } from "@nativescript/core/ui/placeholder";
-import { Repeater } from "@nativescript/core/ui/repeater";
-import { ScrollView } from "@nativescript/core/ui/scroll-view";
-import { TextView } from "@nativescript/core/ui/text-view";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AdService } from "~/admob/ad.service";
 import { SelectedPageService } from "~/shared/selected-page-service";
 import { CategoryListViewModel } from "./category-list-view-model";

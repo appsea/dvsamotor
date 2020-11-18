@@ -7,8 +7,8 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      #- image: circleci/openjdk:8u181-jdk-node-browsers
-      - image: circleci/android:api-28-node8-alpha
+      - image: circleci/android:api-30-node
+
 
       #- image: circleci/android:api-25-alpha
       # Specify service dependencies here if necessary
@@ -17,7 +17,6 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     environment:
-      JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
       #ANDROID_HOME: /usr/lib/google-cloud-sdk
       JVM_OPTS: -Xmx4096m
       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx4096m" -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.daemon=false'
@@ -27,6 +26,8 @@ jobs:
     steps:
       - checkout
 
+      - run: echo $ANDROID_HOME
+      - run: echo $JAVA_HOME
       - run: npm install
 
       # - run: bash ./.circleci/download.sh

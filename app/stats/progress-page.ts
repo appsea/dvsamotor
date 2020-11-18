@@ -1,11 +1,8 @@
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData, Observable } from "@nativescript/core/data/observable";
+import { EventData} from "@nativescript/core/data/observable";
 import * as dialogs from "@nativescript/core/ui/dialogs";
-import { topmost } from "@nativescript/core/ui/frame";
-import { StackLayout } from "@nativescript/core/ui/layouts/stack-layout";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
 import * as Toast from "nativescript-toast";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AdService } from "~/admob/ad.service";
 import { QuestionViewModel } from "~/question/question-view-model";
 import * as navigationModule from "~/shared/navigation";

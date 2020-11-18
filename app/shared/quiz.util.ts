@@ -1,4 +1,4 @@
-import { File, Folder, knownFolders } from "@nativescript/core/file-system";
+import { File, knownFolders } from "@nativescript/core/file-system";
 import { isAndroid, isIOS } from "@nativescript/core/platform";
 import * as frame from "@nativescript/core/ui/frame";
 import * as utils from "@nativescript/core/utils/utils";

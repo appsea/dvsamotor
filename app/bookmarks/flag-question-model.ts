@@ -1,4 +1,3 @@
-import { EventData, Observable } from "@nativescript/core/data/observable";
 import { PersistenceService } from "~/services/persistence.service";
 import { BookmarkQuestionModel } from "./bookmark-question-model";
 

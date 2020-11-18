@@ -1,5 +1,5 @@
-import { EventData, Observable } from "@nativescript/core/data/observable";
-import { clearInterval, setInterval, setTimeout } from "@nativescript/core/timer";
+import { Observable } from "@nativescript/core/data/observable";
+import { setInterval} from "@nativescript/core/timer";
 import { SettingsService } from "~/services/settings.service";
 import { IState } from "~/shared/questions.model";
 import { QuestionViewModel } from "./question-view-model";

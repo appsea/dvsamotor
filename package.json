@@ -7,23 +7,23 @@
     "lintfix": "tslint --fix app/**/*.ts{,x}",
     "test": "mocha --require ts-node/register app/tests/**/*.ts",
     "tsc": "tsc",
-    "android": "tsc && tns run android"
+    "android": "tsc && tns run android --env.monica=\"U2FsdGVkX19T3zgfR+APRRTxPypsm+rG/bo9J9M5kPwbYkUmx8EPasLyXEBglKMKdzGurLjvZdco5aKqsj5PeA==\", --env.gupit=\"dvsamotorcycle\""
   },
   "dependencies": {
-    "crypto-js": "^4.0.0",
     "@nativescript/appversion": "^2.0.0",
-    "nativescript-cardview": "^3.2.0",
+    "@nativescript/core": "^7.0.11",
+    "@nativescript/social-share": "^2.0.1",
+    "@nstudio/nativescript-cardview": "^2.0.1",
+    "crypto-js": "^4.0.0",
     "nativescript-grid-view": "^5.1.0",
     "nativescript-purchase": "^2.0.14",
     "nativescript-screen-orientation": "^2.0.0",
     "nativescript-theme-core": "~1.0.6",
-    "@nativescript/social-share": "^2.0.1",
     "nativescript-toast": "^2.0.0",
     "nativescript-ui-chart": "8.0.2",
     "nativescript-ui-sidedrawer": "9.0.3",
-    "rxjs": "~6.6.3",
     "nativescript-unit-test-runner": "0.7.0",
-    "@nativescript/core": "^7.0.11"
+    "rxjs": "~6.6.3"
   },
   "devDependencies": {
     "@nativescript/android": "7.0.0",

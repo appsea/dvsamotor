@@ -1,7 +1,5 @@
-import { EventData, Observable } from "@nativescript/core/data/observable";
+import { Observable } from "@nativescript/core/data/observable";
 import * as dialogs from "@nativescript/core/ui/dialogs";
-import { topmost } from "@nativescript/core/ui/frame";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AdService } from "~/admob/ad.service";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { CategoryService } from "~/services/category.service";

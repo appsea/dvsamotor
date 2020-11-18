@@ -3,7 +3,6 @@
  */
 import * as appVersion from "@nativescript/appversion";
 import * as appSettings from "@nativescript/core/application-settings";
-import { Observable } from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
 import * as dialogs from "@nativescript/core/ui/dialogs";
 import * as utils from "@nativescript/core/utils/utils";

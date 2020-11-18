@@ -1,5 +1,5 @@
 import * as appSettings from "@nativescript/core/application-settings";
-import { EventData, Observable } from "@nativescript/core/data/observable";
+import { Observable } from "@nativescript/core/data/observable";
 import * as dialogs from "@nativescript/core/ui/dialogs";
 import { TextField } from "@nativescript/core/ui/text-field";
 import * as purchase from "nativescript-purchase";

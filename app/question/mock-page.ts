@@ -1,14 +1,12 @@
-import { android, AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
+import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
 import { EventData } from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
 import * as dialogs from "@nativescript/core/ui/dialogs";
-import { topmost } from "@nativescript/core/ui/frame";
 import { SwipeDirection } from "@nativescript/core/ui/gestures";
 import * as ListView from "@nativescript/core/ui/list-view";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
 import { CreateViewEventData } from "@nativescript/core/ui/placeholder";
 import { ScrollView } from "@nativescript/core/ui/scroll-view";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AdService } from "~/admob/ad.service";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { ConnectionService } from "~/shared/connection.service";

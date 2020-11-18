@@ -1,10 +1,8 @@
-import { android, AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData, Observable } from "@nativescript/core/data/observable";
+import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
+import { EventData} from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
-import { topmost } from "@nativescript/core/ui/frame";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
 import { Repeater } from "@nativescript/core/ui/repeater";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { IState } from "~/shared/questions.model";
 import * as navigationModule from "../shared/navigation";
