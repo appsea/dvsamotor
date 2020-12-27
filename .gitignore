@@ -40,3 +40,6 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 !*.iml
+
+.migration_backup/*
+.update_backup/*
